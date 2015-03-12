@@ -18,7 +18,7 @@ $navAdmin = <<<STR
 <li class="dropdown">
   <button class="btn btn-info dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">FAQ<span class="caret"></span></button>
   <ul class="dropdown-menu" role="menu">
-    <li><a href="#">Create FAQ</a></li>
+    <li><a href="createfaq.php">Create FAQ</a></li>
     <li><a href="#">Edit FAQ</a></li>
     <li class="divider"></li>
     <li><a href="#">Report</a></li>
@@ -100,7 +100,7 @@ STR;
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">HELPDESK</a>
+        <a class="navbar-brand" href="index.php">HELPDESK</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->

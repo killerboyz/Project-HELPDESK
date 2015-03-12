@@ -62,7 +62,7 @@ STR;
 <html>
 <head>
   <meta charset="utf-8">
-  <title>CREATE TICKET</title>
+  <title>CREATE FAQ</title>
   <script src="js/jquery.min.js"></script>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -143,13 +143,13 @@ STR;
     <fieldset>
       <div class="col-md-offset-1 col-md-8">
         <div class="panel panel-danger ">
-          <div class="panel-heading">Ticket Trouble Detail</div>
+          <div class="panel-heading">FAQ Detail</div>
           <div class="panel-body">
 
             <div class="row">
               
               <div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2form-group has-warning">
-                <label class="control-label" for="TicketTopic">TicketTopic</label>
+                <label class="control-label" for="faqTopic">FAQ Topic</label>
                 <input class="form-control" name="TicketTopic" id="TicketTopic"  type="text" placeholder="TicketTopic">
               </div>
               <div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
@@ -165,9 +165,9 @@ STR;
             <div class="row">
 
               <div class="col-xs-5 col-sd-offset-1 col-sd-6 col-md-offset-1 col-md-6">
-                <label for="TroubleDetail">Trouble Detail</label>
+                <label for="TroubleDetail">FAQ Detail</label>
                 <textarea class="form-control" rows="4" name="TroubleDetail" id="TroubleDetail" placeholder="Trouble Detail"></textarea>
-                <span class="help-block">help me ...</span>
+                <span class="help-block">Input FAQ in here ..</span>
               </div>
 
 
@@ -175,14 +175,7 @@ STR;
             </div>
 
             <div class="row">
-             <div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
-              <label for="select" class="control-label">Priority</label>
-              <select class="form-control" Name="priLvl" id="priLvl">
-                <option>Low</option>
-                <option>Normal</option>
-                <option>High</option>
-              </select>
-            </div>
+             
             <div class="col-xs-4 col-sd-offset-1 col-sd-3 col-md-offset-1 col-md-3 form-group">
               <label class="control-label">Please Type</label>
               <div class="input-group">
