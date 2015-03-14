@@ -14,58 +14,7 @@ $htmlLogin = <<<STR
 </form>
 STR;
 
-$navAdmin = <<<STR
-<li class="dropdown">
-  <button class="btn btn-info dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">FAQ<span class="caret"></span></button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="createfaq.php">Create FAQ</a></li>
-    <li><a href="#">Edit FAQ</a></li>
-    <li class="divider"></li>
-    <li><a href="#">Report</a></li>
-  </ul>
-</li>
-<li class="dropdown">
-  <button class="btn btn-warning dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">Ticket<span class="caret"></span></button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="createticket.php">Create Ticket</a></li>
-    <li><a href="tableticket.php">Table Ticket</a></li>
-    <li class="divider"></li>
-    <li><a href="#">Report</a></li>
-  </ul>
-</li>
-STR;
 
-$navSupport = <<<STR
-<li class="dropdown">
-  <button class="btn btn-warning dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">Ticket<span class="caret"></span></button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="createticket.php">Create Ticket</a></li>
-    <li><a href="tableticket.php">Table Ticket</a></li>
-  </ul>
-</form>
-</li>
-<li class="dropdown">
-  <button class="btn btn-warning dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">Ticket<span class="caret"></span></button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="createticket.php">Create Ticket</a></li>
-    <li><a href="tableticket.php">Table Ticket</a></li>
-    <li class="divider"></li>
-    <li><a href="#">Report</a></li>
-  </ul>
-</li>
-STR;
-
-$navUser = <<<STR
-<li class="dropdown">
-  <button class="btn btn-warning dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">Ticket<span class="caret"></span></button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="createticket.php">Create Ticket</a></li>
-    <li class="divider"></li>
-    <li><a href="tableticket.php">Check Ticket</a></li>
-  </ul>
-  
-</li>
-STR;
 
 ?>
 
@@ -111,9 +60,7 @@ STR;
           if(!isset($_SESSION["login"]))
           {
           }
-          else if($_SESSION["login"]["Class"] == "admin") echo $navAdmin;
-          else if($_SESSION["login"]["Class"] == "support") echo $navSupport;
-          else if($_SESSION["login"]["Class"] == "user") echo $navUser;
+          else {echo $_SESSION["login"]["navbar"];}
           ?>
           <li><a href="#">About US</a></li>
         </ul>

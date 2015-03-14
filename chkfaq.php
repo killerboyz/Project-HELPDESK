@@ -2,7 +2,7 @@
 
 if($_POST['ChkConfirm'] == "ABC"){
 
-	echo "Ticket Topic : ".$_POST['TicketTopic']."</br>";
+	echo "FAQ Topic : ".$_POST['FAQTopic']."</br>";
 	echo "Type : ".$_POST['Type']."</br>";
 	echo "Trouble Detail : ".$_POST['TroubleDetail']."</br>";
 	echo "Priority : ".$_POST['priLvl']."</br>";
@@ -12,7 +12,7 @@ if($_POST['ChkConfirm'] == "ABC"){
 else {
 	echo "<script>
 		alert(\"Please type ABC !!\");
-		window.history.back();
+		window.history.back()
 		</script>";
 exit();
 }
