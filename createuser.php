@@ -24,13 +24,17 @@ session_start();
 
   <script>
     function chkUserPass(e) {
-      if((e.which >= 48 && e.which <= 57 || (e.which >= 97 && e.which <= 122))) return true;
+      if((e.keyCode == 37 || e.keyCode == 39 || e.which >= 48 && e.which <= 57) || (e.which >= 97 && e.which <= 122) || e.which == 8) return true;
       else return false;
     };
     function chkName(e) {
-      if ((e.which >= 65 && e.which <= 90) || (e.which >= 97 && e.which <= 122) || (e.which >= 3585 && e.which <= 3652) || e.which == 32) return true;
+      if((e.which == 32 || e.keyCode == 37 || e.keyCode == 39 || e.which >= 65 && e.which <= 90) || (e.which >= 97 && e.which <= 122) || (e.which >= 3585 && e.which <= 3652) || e.which == 8) return true;
       else return false;
     };
+    function chkTel(e){
+      if(e.which == 8 || e.keyCode == 37 || e.keyCode == 39  ||e.which == 43 || e.which == 45 || (e.which >= 48 && e.which <= 57)) return true;
+      else return false;
+    }
     
 
   </script>
@@ -126,7 +130,7 @@ session_start();
           <div class="row">
             <div class="col-xs-2 col-sd-offset-1 col-sd-3 col-md-offset-1 col-md-4">
               <label class="control-label" for="empTel">Telephone</label>
-              <input class="form-control" name="txtempTel" placeholder="Telephone" type="tel" minlength="4" maxlength="15" onkeypress="return event.charCode == 43 || event.charCode == 45 || (event.charCode >= 48 && event.charCode <= 57) " autocomplete="off" tabindex="6" required>
+              <input class="form-control" name="txtempTel" placeholder="Telephone" type="tel" minlength="4" maxlength="15" autocomplete="off" tabindex="6" required onkeypress="return chkTel(event);">
             </div>
           </div>
 
