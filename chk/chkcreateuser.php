@@ -1,5 +1,13 @@
 <?php
 session_start();
+require "../function/function.php";
+include "../config/database.php";
+
+$mysql = mysqlConnect();
+$chkUser = mysqli_fetch_array($mysql->query("SELECT 'username' FROM emp WHERE username = '".mysql_real_escape_string($_POST['txtUsername'])."'"),MYSQLI_ASSOC);
+
+
+
 mysql_connect("10.10.10.99", "killerboyz", "2bBGqQFjP7eduREw")or exit("cannot connect");
 mysql_select_db("helpdesk")or exit("cannot select DB");
 
@@ -9,9 +17,9 @@ if($_POST["pwdtoconfirm"] != $_SESSION["login"]["pwd"])
 	exit();
 	
 }
-else{
-	
-	if(mysql_fetch_assoc(mysql_query("SELECT 'username' FROM emp WHERE username = '".mysql_real_escape_string($_POST['txtUsername'])."'"))) 
+else
+{
+	if($chkUser) 
 	{
 		echo "<script>alert('Username already exists!');window.history.back();</script>";
 		exit();
@@ -27,22 +35,18 @@ else{
 		exit();
 	}
 
-	$countEmpId = mysql_fetch_assoc(mysql_query("SELECT COUNT(empID) as CountID FROM emp"));
-
-	$strInsert = "INSERT INTO emp (empID,username,password,empName,empEmail,empTel,Class) VALUES ('"
-		.(intval($countEmpId["CountID"])+1)."','"
+	$strInsert = "INSERT INTO emp VALUES 
+		('NULL','"
 		.$_POST["txtUsername"]."','"
 		.$_POST["txtPassword"]."','"
 		.$_POST["txtempName"]."','"
 		.$_POST["txtempEmail"]."','"
 		.$_POST["txtempTel"]."','"
-		.$_POST["Class"]."')";
-$queryString = mysql_query($strInsert);
-
-echo "empID = ".(intval($countEmpId["CountID"])+1);
-echo "</br>CREATE USER SUCCESFULL!";
-
-
+		.$_POST["Class"]."',
+		NULL)";
+	$mysql->query($strInsert);
+	echo "empID = ".$mysql->insert_id;
+	echo "</br>CREATE USER SUCCESFULL!";
 }
 
 

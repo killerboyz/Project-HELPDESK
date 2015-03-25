@@ -1,8 +1,9 @@
 <?php
 session_start();
+require "/function/function.php";
 
 $htmlLogin = <<<STR
-<form class="navbar-form navbar-right" method="post" action="chklogin.php">
+<form class="navbar-form navbar-right" method="post" action="/chk/chklogin.php">
   <ul class="nav navbar-nav navbar-right">
     <li><input type="text" name="txtUser" class="form-control" placeholder="Username">&nbsp</li>
     <li><div class="input-group">
@@ -39,51 +40,9 @@ STR;
 
 <body>
 
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.php">HELPDESK</a>
-      </div>
+<?php navbar();?>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <?php
-          if(!isset($_SESSION["login"]))
-          {
-          }
-          else {echo $_SESSION["login"]["navbar"];}
-          ?>
-          <li><a href="#">About US</a></li>
-        </ul>
-        <?php
-        if(!isset($_SESSION["login"]))
-        {
-          echo $htmlLogin;
-        }
-        else 
-        {
-          echo 
-          "<form action=\"logout.php\">
-          <ul class=\"nav navbar-nav navbar-right\">
-            <li><p class=\"navbar-text\">Hello , ".$_SESSION["login"]["empName"]."</p></li>
-            <li><button class=\"btn btn-danger navbar-btn\" type=\"submit\" value=\"logout\">LOGOUT</button></li>
-          </ul>
-        </form>";
-      }
-      ?>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
+<!-- ---------------------------------------------------------------------------------------------------------------- NAVIGATOR BAR --------------------------------------------------------------------------------- -->
 
 <div class="row">
   <div class="col-sm-3 col-sm-offset-1 col-md-1 col-md-offset-1 btn-group-vertical" role="group">
