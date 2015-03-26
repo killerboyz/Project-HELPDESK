@@ -7,10 +7,6 @@ $mysql = mysqlConnect();
 $chkUser = mysqli_fetch_array($mysql->query("SELECT 'username' FROM emp WHERE username = '".mysql_real_escape_string($_POST['txtUsername'])."'"),MYSQLI_ASSOC);
 
 
-
-mysql_connect("10.10.10.99", "killerboyz", "2bBGqQFjP7eduREw")or exit("cannot connect");
-mysql_select_db("helpdesk")or exit("cannot select DB");
-
 if($_POST["pwdtoconfirm"] != $_SESSION["login"]["pwd"])
 {
 	echo "<script>alert('Please type your correct Password!');window.history.back();</script>";
@@ -36,7 +32,7 @@ else
 	}
 
 	$strInsert = "INSERT INTO emp VALUES 
-		('NULL','"
+		(NULL,'"
 		.$_POST["txtUsername"]."','"
 		.$_POST["txtPassword"]."','"
 		.$_POST["txtempName"]."','"
@@ -45,8 +41,10 @@ else
 		.$_POST["Class"]."',
 		NULL)";
 	$mysql->query($strInsert);
-	echo "empID = ".$mysql->insert_id;
-	echo "</br>CREATE USER SUCCESFULL!";
+	echo var_dump($mysql->query($strInsert))."</br>";
+	echo $strInsert."</br>";
+	echo "empID = ".$mysql->insert_id."</br>";
+	echo "CREATE USER SUCCESFULL!";
 }
 
 

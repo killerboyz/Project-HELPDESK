@@ -41,7 +41,7 @@ STR;
 
 	if(!isset($_SESSION["login"]))echo $htmlLogin;
 	else 
-	{
+	{	
 		echo "<form action='../logout.php'>
 		<ul class='nav navbar-nav navbar-right'>
 			<li><p class='navbar-text'>Hello , ".$_SESSION["login"]["empName"]."</p></li>

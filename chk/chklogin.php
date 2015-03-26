@@ -2,14 +2,9 @@
 session_start();
 include '../config/database.php';
 
-/*
-mysql_connect("10.10.10.99", "killerboyz", "2bBGqQFjP7eduREw")or exit("cannot connect");
-mysql_select_db("helpdesk")or exit("cannot select DB");
-$objResult = mysql_fetch_assoc(mysql_query("SELECT * FROM emp WHERE username = '".mysql_real_escape_string($_POST['txtUser'])."' and password = '".mysql_real_escape_string($_POST['txtPass'])."'"));
-*/
 
 $mysql = mysqlConnect();
-$objResult = mysqli_fetch_array($mysql->query("SELECT * FROM emp WHERE username = '".mysql_real_escape_string($_POST['txtUser'])."' and password = '".mysql_real_escape_string($_POST['txtPass'])."'"),MYSQLI_ASSOC);
+$objResult = mysqli_fetch_assoc($mysql->query("SELECT * FROM emp WHERE username = '".mysql_real_escape_string($_POST['txtUser'])."' and password = '".mysql_real_escape_string($_POST['txtPass'])."'"));
 
 if(!$objResult) {
 	echo 	"<script>
@@ -24,11 +19,15 @@ $_SESSION["login"] = array(
 							"empName" => $objResult["empName"],
 							"pwd" => $objResult["password"]
 						);
+//$mysql->query("UPDATE emp SET last-log-on=NOW() WHERE empID=".$objResult["empID"]);
+//echo "UPDATE emp SET last-log-on=NOW() WHERE empID=".$objResult["empID"];
 
 header("location: ../index.php");
 
-/*$_SESSION["login"]["Class"] = $objResult["Class"];
+/*
+$_SESSION["login"]["Class"] = $objResult["Class"];
 $_SESSION["login"]["empID"] = $objResult["empID"];
-$_SESSION["login"]["empName"] = $objResult["empName"];*/
+$_SESSION["login"]["empName"] = $objResult["empName"];
+*/
 ?>
 
