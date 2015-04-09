@@ -19,7 +19,7 @@ $_SESSION["login"] = array(
 							"empName" => $objResult["empName"],
 							"pwd" => $objResult["password"]
 						);
-//$mysql->query("UPDATE emp SET last-log-on=NOW() WHERE empID=".$objResult["empID"]);
+$mysql->query("UPDATE emp SET `last-log-on`='".date("Y-m-d H:i:s",time())."' WHERE empID=".$objResult["empID"]);
 //echo "UPDATE emp SET last-log-on=NOW() WHERE empID=".$objResult["empID"];
 
 header("location: ../index.php");

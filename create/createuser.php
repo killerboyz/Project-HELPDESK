@@ -54,7 +54,7 @@ require "../function/function.php";
 
         <div class="col-md-12">
           <div class="panel panel-info ">
-            <div class="panel-heading">User DETAIL</div>
+            <div class="panel-heading">USER DETAIL</div>
             <div class="panel-body">
 
               <div class="row">

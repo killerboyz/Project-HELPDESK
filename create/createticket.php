@@ -36,7 +36,7 @@ require "../function/function.php";
           <div class="panel-body">
             <div class="row">
               <div class="col-xs-2 col-sd-offset-1 col-md-offset-1">    
-                <label class="control-label" for="EmpName">EmpName</label>
+                <label class="control-label" for="EmpName">Employee Name</label>
                 <input class="form-control" id="EmpName" placeholder="EmpName" type="text" disabled="" value="<?php echo htmlspecialchars($_SESSION["login"]["empName"]);?>">
               </div>
             </div>
@@ -55,7 +55,7 @@ require "../function/function.php";
             <div class="panel-body">
 
               <div class="row">
-                <div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2form-group has-warning">
+                <div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2 form-group has-warning">
                   <label class="control-label" for="TicketTopic">Ticket Topic</label>
                   <input class="form-control" name="txtTopic" id="txtTopic"  type="text" placeholder="Ticket Topic" minlength="6" maxlength="50" autocomplete="off" title="Allow only lowercase letters and numbers. At least 6 letters." pattern=".{6,50}" tabindex="1" required> 
                 </div>
@@ -80,7 +80,7 @@ require "../function/function.php";
               <div class="row">
                 <div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
                   <label for="select" class="control-label">Upload PSR file</label>
-                  <input id="input-1a" type="file" class="file" data-show-preview="false">
+                  <input type="file" class="file" id="psrUpload" data-show-preview="true" accept=".zip">
 
                 </div>
               </div>

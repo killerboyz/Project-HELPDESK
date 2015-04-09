@@ -10,6 +10,7 @@ require "../function/function.php";
 <head>
   <meta charset="utf-8">
   <title>CREATE FAQ</title>
+  
   <script src="../js/jquery.min.js"></script>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -20,6 +21,7 @@ require "../function/function.php";
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="../js/bootstrap.min.js"></script>
+  <script src="../ckeditor/ckeditor.js"></script>
 </head>
 
 <body>
@@ -47,7 +49,7 @@ require "../function/function.php";
   </div>
 
   <div class="container">
-    <form name="CreateTicket" method="post" action="/chk/chkticket.php">
+    <form name="CreateTicket" method="post" action="../chk/chkcreatefaq.php">
       <div class="row">
         <div class="col-md-12">
           <div class="panel panel-danger ">
@@ -57,7 +59,7 @@ require "../function/function.php";
               <div class="row">
                <div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2form-group has-warning">
                 <label class="control-label" for="faqTopic">FAQ Topic</label>
-                <input class="form-control" name="TicketTopic" id="TicketTopic"  type="text" placeholder="TicketTopic">
+                <input class="form-control" name="FAQtopic" id="FAQtopic"  type="text" placeholder="FAQ Topic" minlength="6" maxlength="50" autocomplete="off" title="Allow only lowercase letters and numbers. At least 6 letters." pattern=".{6,50}" tabindex="1" required>
               </div>
               <div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
                 <label for="select" class="control-label">Type</label>
@@ -70,9 +72,16 @@ require "../function/function.php";
             </div>
 
             <div class="row">
-              <div class="col-xs-5 col-sd-offset-1 col-sd-6 col-md-offset-1 col-md-6">
+              <div class="col-xs-10 col-sd-push-1 col-sd-10 col-md-push-1 col-md-10">
                 <label for="TroubleDetail">FAQ Detail</label>
-                <textarea class="form-control" rows="4" name="TroubleDetail" id="TroubleDetail" placeholder="Trouble Detail"></textarea>
+                <textarea class="form-control" rows="20" cols="" name="FAQdescript" id="FAQdescript" >Input FAQ in here ..</textarea>
+                <script>
+                  // Replace the <textarea id="editor1"> with a CKEditor
+                  // instance, using default configuration.
+                  CKEDITOR.replace( 'FAQdescript',{
+                  "filebrowserImageUploadUrl": "/path_to/ckeditor/plugins/imgupload.php"
+                } );
+                </script>
                 <span class="help-block">Input FAQ in here ..</span>
               </div>
             </div>
@@ -83,7 +92,7 @@ require "../function/function.php";
                 <label class="control-label">Please Type</label>
                 <div class="input-group">
                   <span class="input-group-addon">ABC</span>
-                  <input class="form-control" name="ChkConfirm" id="ChkConfirm" type="text">
+                  <input class="form-control" name="ChkConfirm" id="ChkConfirm" type="text" autocomplete="off" tabindex="5" required>
                   <span class="input-group-btn">
                     <button class="btn btn-success" type="submit" >Confirm</button>
                   </span>
