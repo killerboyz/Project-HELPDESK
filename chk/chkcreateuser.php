@@ -99,46 +99,46 @@ $mysql->query($strInsert);
 				<div class="panel-body">
 
 					<div class="row">
-						<div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
+						<div class="col-xs-8 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">
 							<label class="control-label" for="User ID">User ID</label>
 							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($mysql->insert_id);?></text>
 						</div>
 					</div>
 
 					<div class="row">
-						<div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
+						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1">
 							<label class="control-label" for="username">Username</label>
 							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($_POST['txtUsername']);?></text>
 						</div>
-						<div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
+						<div class="col-xs-4">
 							<label class="control-label" for="password">Password</label>
 							<input class="form-control" type="password" name="txtPassword" id="txtPassword" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" value="<?php echo htmlspecialchars($_POST['txtPassword']);?>" readonly disable="">
 						</div>
 					</div>
 
 					<div class="row">
-						<div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
+						<div class="col-xs-8 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">
 							<label class="control-label" for="txtempName">Employee Name</label>
 							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($_POST['txtempName']);?></text>
 						</div>
 					</div>
 
 					<div class="row">
-						<div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
+						<div class="col-xs-8 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">
 							<label class="control-label" for="txtempEmail">Employee Email</label>
 							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($_POST['txtempEmail']);?></text>
 						</div>
 					</div>
 
 					<div class="row">
-						<div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
+						<div class="col-xs-8 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">
 							<label class="control-label" for="txtempTel">Employee Telephone</label>
 							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($_POST['txtempTel']);?></text>
 						</div>
 					</div>
 
 					<div class="row">
-						<div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
+						<div class="col-xs-8 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">
 							<label class="control-label" for="Class">Class</label>
 								<text class="form-control" readonly disable=""><?php echo htmlspecialchars($_POST['Class']);?></text>
 							</div>

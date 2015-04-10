@@ -58,11 +58,11 @@ if($_POST['ChkConfirm'] != "ABC")
 				<div class="panel-heading">Ticket Detail</div>
 					<div class="panel-body">
 						<div class="row">
-							<div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
+							<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 								<label class="control-label" for="TicketID">Ticket ID</label>
 								<text class="form-control" readonly disable=""><?php echo htmlspecialchars($mysql->insert_id);?></text>
 							</div>
-							<div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
+							<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 								<label class="control-label" for="TicketTopic">Ticket Topic</label>
 								<text class="form-control" readonly disable=""><?php echo htmlspecialchars($_POST['txtTopic']);?></text>
 
@@ -70,18 +70,18 @@ if($_POST['ChkConfirm'] != "ABC")
 						</div>
 
 						<div class="row">
-							<div class="col-xs-5 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-5">
+							<div class="col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9">
 								<label class="control-label" for="TroubleDetail">Trouble Detail</label>
 								<textarea class="form-control" rows="6" style="resize: none;"readonly disabled><?php echo htmlspecialchars($_POST['txtDetail']);?></textarea>
 							</div>
 						</div>
 
 						<div class="row">
-							<div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
+							<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 								<label class="control-label" for="Type">Type</label>
 								<text class="form-control" readonly disable=""><?php echo htmlspecialchars($_POST['Type']);?></text>
 							</div>
-							<div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
+							<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 								<label class="control-label" for="Priority">Priority</label>
 								<text class="form-control" readonly disable=""><?php echo htmlspecialchars($_POST['priLvl']);?></text>
 							</div>

@@ -37,8 +37,8 @@ require "../function/function.php";
           <div class="panel-heading">Employee Detail</div>
           <div class="panel-body">
             <div class="row">
-              <div class="col-xs-2 col-sd-offset-1 col-md-offset-1">    
-                <label class="control-label" for="EmpName">EmpName</label>
+              <div class="col-xs-6 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">    
+                <label class="control-label" for="EmpName">Employee Name</label>
                 <input class="form-control" id="EmpName" placeholder="EmpName" type="text" disabled="" value="<?php echo htmlspecialchars($_SESSION["login"]["empName"]);?>">
               </div>
             </div>
@@ -57,11 +57,11 @@ require "../function/function.php";
             <div class="panel-body">
 
               <div class="row">
-               <div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2form-group has-warning">
+               <div class="col-xs-4 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4 form-group has-warning">
                 <label class="control-label" for="faqTopic">FAQ Topic</label>
                 <input class="form-control" name="FAQtopic" id="FAQtopic"  type="text" placeholder="FAQ Topic" minlength="6" maxlength="50" autocomplete="off" title="Allow only lowercase letters and numbers. At least 6 letters." pattern=".{6,50}" tabindex="1" required>
               </div>
-              <div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
+              <div class="col-xs-4 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">
                 <label for="select" class="control-label">Type</label>
                 <select class="form-control" name="Type" id="Type">
                   <option>Program A</option>
@@ -88,7 +88,7 @@ require "../function/function.php";
 
             <div class="row">
 
-              <div class="col-xs-4 col-sd-offset-1 col-sd-3 col-md-offset-1 col-md-3 form-group">
+              <div class="col-xs-8 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4 form-group">
                 <label class="control-label">Please Type</label>
                 <div class="input-group">
                   <span class="input-group-addon">ABC</span>
