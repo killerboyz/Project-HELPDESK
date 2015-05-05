@@ -14,9 +14,8 @@ function genTable()
 
 	while ($row = mysqli_fetch_array($result, MYSQL_NUM)) 
 	{
-		echo "<form method='post' action='#'>\n";
-
-
+		echo "<form method='post' action='../ticket/ticketdetail.php'>\n";
+		
 		if($row[3] == "High") echo "<tr class='danger'>\n";
 	    else if($row[3] == "Normal") echo "<tr class='warning'>\n";
 	    else echo "<tr class='active'>\n";
@@ -53,6 +52,7 @@ function genTable()
 	    				<h4><span class='label label-default'>".$row[4]."</span>\n
 	    			</td>\n";
 	    ////////////////////////////////////////////////////////////////////////////////////////////////////////// STATUS
+	    echo "<input type='hidden' name='ticketID' value='".$row[0]."'>";
 
 	    echo "</tr>\n
 	    	</form>\n";
@@ -69,7 +69,7 @@ function genTable()
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>TICKET</title>
+	<title>TICKET TABLE LIST</title>
 	<script src="../js/jquery.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
