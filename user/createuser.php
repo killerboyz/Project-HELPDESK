@@ -47,7 +47,7 @@ require "../function/function.php";
   <!-- ---------------------------------------------------------------------------------------------------------------- NAVIGATOR BAR --------------------------------------------------------------------------------- -->
   
   <div class="container">
-    <form name="CreateTicket" method="post" action="/chk/chkcreateuser.php">
+    <form name="CreateTicket" method="post" action="/user/chkcreateuser.php">
       <div class="row">
 
         <div class="col-md-12">

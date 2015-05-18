@@ -3,7 +3,7 @@ session_start();
 require "/function/function.php";
 
 $htmlLogin = <<<STR
-<form class="navbar-form navbar-right" method="post" action="/chk/chklogin.php">
+<form class="navbar-form navbar-right" method="post" action="/function/chklogin.php">
   <ul class="nav navbar-nav navbar-right">
     <li><input type="text" name="txtUser" class="form-control" placeholder="Username">&nbsp</li>
     <li><div class="input-group">

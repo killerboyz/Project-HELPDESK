@@ -3,11 +3,6 @@ session_start();
 require "../function/function.php";
 include "../config/database.php";
 
-$mysql = mysqlConnect();
-$strInsert = "INSERT INTO ticket (TicketTopic,TicketType,TroubleDetail,Priority,psrPath,`Create-By`)
-VALUES ('".$_POST["txtTopic"]."','".$_POST["Type"]."','".$_POST["txtDetail"]."','".$_POST["priLvl"]."',NULL,".$_SESSION["login"]["empID"].")";
-$mysql->query($strInsert);
-
 if($_POST['ChkConfirm'] != "ABC")
 {
 	echo "<script>
@@ -16,6 +11,13 @@ if($_POST['ChkConfirm'] != "ABC")
 		</script>";
 	exit();
 }
+
+$mysql = mysqlConnect();
+$strInsert = "INSERT INTO ticket (TicketTopic,TicketType,TroubleDetail,Priority,psrPath,Create_By)
+VALUES ('".$_POST["txtTopic"]."','".$_POST["Type"]."','".$_POST["txtDetail"]."','".$_POST["priLvl"]."',NULL,".$_SESSION["login"]["empID"].")";
+$mysql->query($strInsert);
+
+
 
 ?>
 

@@ -11,12 +11,17 @@ require "../function/function.php";
   <meta charset="utf-8">
   <title>CREATE TICKET</title>
   <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap-filestyle.js">
+  $(":file").filestyle({buttonName: "btn-primary"});
+  </script>
+  
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="../css/bootstrap.min.css">
 
   <!-- Optional theme -->
   <link rel="stylesheet" href="../css/_bootswatch.scss">
   <link rel="stylesheet" href="../css/_variables.scss">
+
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="../js/bootstrap.min.js"></script>
@@ -47,7 +52,7 @@ require "../function/function.php";
   </div>
 
   <div class="container">
-    <form name="CreateTicket" method="post" action="/chk/chkcreateticket.php">
+    <form name="CreateTicket" method="post" action="/ticket/chkcreateticket.php">
       <div class="row">
         <div class="col-md-12">
           <div class="panel panel-danger ">
@@ -79,8 +84,8 @@ require "../function/function.php";
 
               <div class="row">
                 <div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
-                  <label for="select" class="control-label">Upload PSR file</label>
-                  <input type="file" class="file" id="psrUpload" data-show-preview="true" accept=".zip">
+                  <label class="control-label">Upload PSR file</label>
+                  <input type="file" id="psrUpload" class="filestyle" data-buttonName="btn-primary" data-iconName="glyphicon-inbox"  data-size="md" accept=".zip">
 
                 </div>
               </div>

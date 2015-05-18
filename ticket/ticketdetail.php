@@ -3,7 +3,81 @@ session_start();
 require "../function/function.php";
 include "../config/database.php";
 $mysql = mysqlConnect();
-$objResult = mysqli_fetch_assoc($mysql->query("SELECT * FROM ticket INNER JOIN emp ON ticket.`Create-By`=emp.`empID` WHERE TicketID='".$_POST["ticketID"]."'"));
+$strSQL = "SELECT 
+				T.TicketID,
+				T.TicketTopic,
+				T.TicketType,
+				T.TroubleDetail,
+				T.Priority,
+				T.psrPath,
+				T.Create_On,
+				E1.empName AS Create_By,
+				E1.empEmail AS empEmail,
+				E1.empTel AS empTel,
+				T.Support_On,
+				E2.empName AS Support_By,
+				T.Status
+			FROM
+				ticket AS T
+			INNER JOIN 
+				emp AS E1
+			ON 
+				T.Create_By = E1.empID
+			LEFT JOIN
+				emp AS E2
+			ON 
+				T.Support_By = E2.empID
+			WHERE 
+				TicketID='".$_POST["ticketID"]."'";
+
+$objResult = mysqli_fetch_assoc($mysql->query($strSQL));
+
+function ConfirmUpdate()
+{
+	global $objResult;
+	
+	echo 
+		"<div class='row'>
+			<div class='col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9'>
+				<div class='form-group'>
+					<label class='control-label'>Confirm Update</label>
+					<div class='input-group'>
+						<span class='input-group-addon'>Type Password</span>
+						<input type='password' class='form-control' id='chkPassword' autocomplete='off' minlength='5' required onmouseover='mouseoverPass();'' onmouseout='mouseoutPass();''>
+						<span class='input-group-btn'>";
+
+
+
+					 
+if($objResult["Status"] == "Open") echo "
+	<input class='btn btn-info disabled' type='submit' value='Open'>
+<input class='btn btn-success' type='submit' value='Processing'>
+<input class='btn btn-warning' type='submit' value='Solved'>
+<input class='btn btn-danger' type='submit' value='Closed'>";
+elseif ($objResult["Status"] == "Processing") echo "
+	<input class='btn btn-info disabled' type='submit' value='Open'>
+<input class='btn btn-success' type='submit' value='Processing'>Processing</input>
+<input class='btn btn-warning' type='submit' value='Solved'>Solved</input>
+<input class='btn btn-danger' type='submit' value='Closed'>";
+elseif ($objResult["Status"] == "Solved") echo "
+	<input class='btn btn-info disabled' type='submit' value='Open'>
+<input class='btn btn-success disabled' type='submit' value='Processing'>Processing</input>
+<input class='btn btn-warning disabled' type='submit' value='Solved'>Solved</input>
+<input class='btn btn-danger' type='submit' value='Closed'>";
+else echo "
+	<input class='btn btn-info disabled' type='submit' value='Open'>
+<input class='btn btn-success disabled' type='submit' value='Processing'>Processing</input>
+<input class='btn btn-warning disabled' type='submit' value='Solved'>
+<input class='btn btn-danger disabled' type='submit' value='Closed'>";
+
+					
+echo "					
+</span>
+</div>
+</div>
+</div>
+</div>";
+}
 
 ?>
 
@@ -43,18 +117,28 @@ $objResult = mysqli_fetch_assoc($mysql->query("SELECT * FROM ticket INNER JOIN e
 	<div class="container">
 		<div class="row">
 			<div class="panel panel-success">
-				<div class="panel-heading">Ticket Detail</div>
+				<div class="panel-heading">Creator Detail</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Create By</label>
-							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($objResult["empName"]);?></text>
+							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($objResult["Create_By"]);?></text>
 						</div>
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Create On</label>
-							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($objResult["Create-On"]);?></text>
+							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($objResult["Create_On"]);?></text>
 						</div>
+					</div>
 
+					<div class="row">
+						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
+							<label class="control-label">Employee Email</label>
+							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($objResult["empEmail"]);?></text>
+						</div>
+						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
+							<label class="control-label">Employee Tel</label>
+							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($objResult["empTel"]);?></text>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -65,7 +149,7 @@ $objResult = mysqli_fetch_assoc($mysql->query("SELECT * FROM ticket INNER JOIN e
 	<div class="container">
 		<div class="row">
 			<div class="panel panel-info">
-				<div class="panel-heading">Ticket Description</div>
+				<div class="panel-heading">Ticket Detail</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
@@ -108,16 +192,30 @@ $objResult = mysqli_fetch_assoc($mysql->query("SELECT * FROM ticket INNER JOIN e
 					<div class="row">
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Support By</label>
-							<text class="form-control" readonly disable=""><?php echo $_SESSION["login"]["empName"];?></text>
+							<text class="form-control" readonly disable="">
+
+							<?php 
+							if($objResult["Support_By"] == null) echo "Not Yet";
+							else echo $objResult["Support_By"];
+							?>
+
+							</text>
 						</div>
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Support On</label>
-							<text class="form-control" readonly disable=""><?php echo date("Y-m-d H:i:s",time());?></text>
+							<text class="form-control" readonly disable="">
+							<?php 
+							date("Y-m-d H:i:s",time());
+							if($objResult["Support_On"] == null) echo "Not Yet";
+							?>
+							</text>
 						</div>
 					</div>
 
 					<?php
 
+					if($_SESSION["login"]["Class"] != "user")
+					{
 					echo "
 					<div class='row'>
 						<div class='col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9'>
@@ -125,59 +223,39 @@ $objResult = mysqli_fetch_assoc($mysql->query("SELECT * FROM ticket INNER JOIN e
 							<textarea class='form-control' name='txtDetail' id='txtDetail' autocomplete='off' minlength='6' rows='4' style='resize: none;'></textarea>
 						</div>
 					</div>";
+					}
+					else 
+					{
+						echo "
+					<div class='row'>
+						<div class='col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9'>
+							<label class='control-label'>Trouble Detail</label>
+							<textarea class='form-control' name='txtDetail' id='txtDetail' autocomplete='off' minlength='6' rows='4' readonly style='resize: none;'></textarea>
+						</div>
+					</div>";
+					}
 
 					if($objResult["psrPath"] != null) echo "
 						<br>
-						<div class='row'>
-							<div class='col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4'>
-								<input class='btn btn-primary' type='button' value='Download PSR'>
-							</div>
+					<div class='row'>
+						<div class='col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4'>
+							<input class='btn btn-primary' type='button' value='Download PSR'>
 						</div>
-						<br>";
+					</div>
+					<br>";
+
+					if($_SESSION["login"]["Class"] != "user") ConfirmUpdate();
+
 					?>
-					
-					<div class="row">
-					<div class="col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9 ">
-						<div class="form-group">
-							<label class="control-label">Confirm Update</label>
-							<div class="input-group">
-								<span class="input-group-addon" >Type Password</span>
-								<input type="password" class="form-control" id="chkPassword" autocomplete="off" minlength="5" required onmouseover="mouseoverPass();" onmouseout="mouseoutPass();">
-								<span class="input-group-btn">
-
-								<?php 
-								if($objResult["Status"] == "Open") echo "
-									<input class='btn btn-info disabled' type='submit' value='Open'>
-									<input class='btn btn-success' type='submit' value='Processing'>
-									<input class='btn btn-warning' type='submit' value='Solved'>
-									<input class='btn btn-danger' type='submit' value='Closed'>";
-								elseif ($objResult["Status"] == "Processing") echo "
-									<input class='btn btn-info disabled' type='submit' value='Open'>
-									<input class='btn btn-success' type='submit' value='Processing'>Processing</input>
-									<input class='btn btn-warning' type='submit' value='Solved'>Solved</input>
-									<input class='btn btn-danger' type='submit' value='Closed'>";
-								elseif ($objResult["Status"] == "Solved") echo "
-									<input class='btn btn-info disabled' type='submit' value='Open'>
-									<input class='btn btn-success disabled' type='submit' value='Processing'>Processing</input>
-									<input class='btn btn-warning disabled' type='submit' value='Solved'>Solved</input>
-									<input class='btn btn-danger' type='submit' value='Closed'>";
-								else echo "
-									<input class='btn btn-info disabled' type='submit' value='Open'>
-									<input class='btn btn-success disabled' type='submit' value='Processing'>Processing</input>
-									<input class='btn btn-warning disabled' type='submit' value='Solved'>
-									<input class='btn btn-danger disabled' type='submit' value='Closed'>";
-
-								?>
-								</span>
-								
-							</div>
-						</div>
-					</div>
-					</div>
-
+				
 				</div>
 			</div>
 		</div>
+
+		<div class="row center-block">
+			<a class="center-block btn btn-primary btn-lg" href="../index.php">Back to Home</a>
+		</div>
+
 	</div>
 
 

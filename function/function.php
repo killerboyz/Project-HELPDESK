@@ -3,7 +3,7 @@
 function navbar()
 {
 	$htmlnav1 = <<<STR
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -22,7 +22,7 @@ function navbar()
 				<ul class="nav navbar-nav">
 STR;
 	$htmlLogin = <<<STR
-	<form class="navbar-form navbar-right" method="post" action="/chk/chklogin.php">
+	<form class="navbar-form navbar-right" method="post" action="/function/chklogin.php">
 		<ul class="nav navbar-nav navbar-right">
 			<li><input type="text" name="txtUser" class="form-control" placeholder="Username">&nbsp</li>
 			<li><div class="input-group">
@@ -42,7 +42,7 @@ STR;
 	if(!isset($_SESSION["login"]))echo $htmlLogin;
 	else 
 	{	
-		echo "<form action='../logout.php'>
+		echo "<form action='/function/logout.php'>
 		<ul class='nav navbar-nav navbar-right'>
 			<li><p class='navbar-text'>Hello , ".$_SESSION["login"]["empName"]."</p></li>
 			<li><button class='btn btn-danger navbar-btn' type='submit' value='LOGOUT'>LOGOUT</button></li>
@@ -70,7 +70,7 @@ function navLogin()
 		<li class="dropdown">
 			<button class="btn btn-info dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="true">FAQ<span class="caret"></span></button>
 			<ul class="dropdown-menu" role="menu">
-				<li><a href="/create/createfaq.php">Create FAQ</a></li>
+				<li><a href="/faq/createfaq.php">Create FAQ</a></li>
 				<li><a href="#">Edit FAQ</a></li>
 				<li class="divider"></li>
 				<li><a href="#">Report</a></li>
@@ -79,8 +79,8 @@ function navLogin()
 		<li class="dropdown">
 			<button class="btn btn-warning dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">Ticket<span class="caret"></span></button>
 			<ul class="dropdown-menu" role="menu">
-				<li><a href="/create/createticket.php">Create Ticket</a></li>
-				<li><a href="/tablelist/tableticket.php">Table Ticket</a></li>
+				<li><a href="/ticket/createticket.php">Create Ticket</a></li>
+				<li><a href="/ticket/tableticket.php">Table Ticket</a></li>
 				<li class="divider"></li>
 				<li><a href="#">Report</a></li>
 			</ul>
@@ -88,7 +88,7 @@ function navLogin()
 		<li class="dropdown">
 			<button class="btn btn-success dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">User<span class="caret"></span></button>
 			<ul class="dropdown-menu" role="menu">
-				<li><a href="/create/createuser.php">Create USER</a></li>
+				<li><a href="/user/createuser.php">Create USER</a></li>
 				<li class="divider"></li>
 				<li><a href="#">Edit User</a></li>
 			</ul>
@@ -101,7 +101,7 @@ STR;
 		<li class="dropdown">
 			<button class="btn btn-info dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="true">FAQ<span class="caret"></span></button>
 			<ul class="dropdown-menu" role="menu">
-				<li><a href="/create/createfaq.php">Create FAQ</a></li>
+				<li><a href="/faq/createfaq.php">Create FAQ</a></li>
 				<li><a href="#">Edit FAQ</a></li>
 				<li class="divider"></li>
 				<li><a href="#">Report</a></li>
@@ -110,8 +110,8 @@ STR;
 		<li class="dropdown">
 			<button class="btn btn-warning dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">Ticket<span class="caret"></span></button>
 			<ul class="dropdown-menu" role="menu">
-				<li><a href="/create/createticket.php">Create Ticket</a></li>
-				<li><a href="/tablelist/tableticket.php">Table Ticket</a></li>
+				<li><a href="/ticket/createticket.php">Create Ticket</a></li>
+				<li><a href="/ticket/tableticket.php">Table Ticket</a></li>
 				<li class="divider"></li>
 				<li><a href="#">Report</a></li>
 			</ul>
@@ -124,9 +124,9 @@ STR;
 		<li class="dropdown">
 			<button class="btn btn-warning dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">Ticket<span class="caret"></span></button>
 			<ul class="dropdown-menu" role="menu">
-				<li><a href="/create/createticket.php">Create Ticket</a></li>
+				<li><a href="/ticket/createticket.php">Create Ticket</a></li>
 				<li class="divider"></li>
-				<li><a href="/tablelist/tableticket.php">Check Ticket</a></li>
+				<li><a href="/ticket/tableticket.php">Check Ticket</a></li>
 			</ul>
 		</li>
 STR;
