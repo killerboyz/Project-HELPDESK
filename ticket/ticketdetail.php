@@ -37,45 +37,45 @@ function ConfirmUpdate()
 	global $objResult;
 	
 	echo 
-		"<div class='row'>
-			<div class='col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9'>
-				<div class='form-group'>
-					<label class='control-label'>Confirm Update</label>
-					<div class='input-group'>
-						<span class='input-group-addon'>Type Password</span>
-						<input type='password' class='form-control' id='chkPassword' autocomplete='off' minlength='5' required onmouseover='mouseoverPass();'' onmouseout='mouseoutPass();''>
-						<span class='input-group-btn'>";
+	"<div class='row'>
+	<div class='col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9'>
+		<div class='form-group'>
+			<label class='control-label'>Confirm Update</label>
+			<div class='input-group'>
+				<span class='input-group-addon'>Type Password</span>
+				<input type='password' class='form-control' name='chkPassword' id='chkPassword' autocomplete='off' minlength='5' required onmouseover='mouseoverPass();'' onmouseout='mouseoutPass();''>
+				<span class='input-group-btn'>";
 
 
 
-					 
-if($objResult["Status"] == "Open") echo "
-	<input class='btn btn-info disabled' type='submit' value='Open'>
-<input class='btn btn-success' type='submit' value='Processing'>
-<input class='btn btn-warning' type='submit' value='Solved'>
-<input class='btn btn-danger' type='submit' value='Closed'>";
-elseif ($objResult["Status"] == "Processing") echo "
-	<input class='btn btn-info disabled' type='submit' value='Open'>
-<input class='btn btn-success' type='submit' value='Processing'>Processing</input>
-<input class='btn btn-warning' type='submit' value='Solved'>Solved</input>
-<input class='btn btn-danger' type='submit' value='Closed'>";
-elseif ($objResult["Status"] == "Solved") echo "
-	<input class='btn btn-info disabled' type='submit' value='Open'>
-<input class='btn btn-success disabled' type='submit' value='Processing'>Processing</input>
-<input class='btn btn-warning disabled' type='submit' value='Solved'>Solved</input>
-<input class='btn btn-danger' type='submit' value='Closed'>";
-else echo "
-	<input class='btn btn-info disabled' type='submit' value='Open'>
-<input class='btn btn-success disabled' type='submit' value='Processing'>Processing</input>
-<input class='btn btn-warning disabled' type='submit' value='Solved'>
-<input class='btn btn-danger disabled' type='submit' value='Closed'>";
+
+					if($objResult["Status"] == "Open") echo "
+						<input class='btn btn-info disabled' name='status' id='status' type='submit' value='Open'>
+					<input class='btn btn-success' name='status' id='status' type='submit' value='Processing'>
+					<input class='btn btn-warning' name='status' id='status' type='submit' value='Solved'>
+					<input class='btn btn-danger' name='status' id='status' type='submit' value='Closed'>";
+					elseif ($objResult["Status"] == "Processing") echo "
+						<input class='btn btn-info disabled' name='status' id='status' type='submit' value='Open'>
+					<input class='btn btn-success' name='status' id='status' type='submit' value='Processing'>
+					<input class='btn btn-warning' name='status' id='status' type='submit' value='Solved'>
+					<input class='btn btn-danger' name='status' id='status' type='submit' value='Closed'>";
+					elseif ($objResult["Status"] == "Solved") echo "
+						<input class='btn btn-info disabled' name='status' id='status' type='submit' value='Open'>
+					<input class='btn btn-success disabled' name='status' id='status' type='submit' value='Processing'>
+					<input class='btn btn-warning disabled' name='status' id='status' type='submit' value='Solved'>
+					<input class='btn btn-danger' id='status' name='status' type='submit' value='Closed'>";
+					else echo "
+						<input class='btn btn-info disabled' name='status' type='submit' value='Open'>
+					<input class='btn btn-success disabled' name='status' type='submit' value='Processing'>
+					<input class='btn btn-warning disabled' name='status' type='submit' value='Solved'>
+					<input class='btn btn-danger disabled' name='status' type='submit' value='Closed'>";
 
 					
-echo "					
-</span>
-</div>
-</div>
-</div>
+					echo "<input type='hidden' name='tickID' id='tickID' value='".$_POST['ticketID']."''>
+				</span>
+			</div>
+		</div>
+	</div>
 </div>";
 }
 
@@ -111,10 +111,13 @@ echo "
 </head>
 
 <body>
+	
 	<?php navbar();?>
 
 	<!-- ---------------------------------------------------------------------------------------------------------------- NAVIGATOR BAR --------------------------------------------------------------------------------- -->
+	
 	<div class="container">
+	
 		<div class="row">
 			<div class="panel panel-success">
 				<div class="panel-heading">Creator Detail</div>
@@ -144,9 +147,11 @@ echo "
 			</div>
 
 		</div>
+		
 	</div>
 	<!-- ---------------------------------------------------------------------------------------------------------------- TICKET DETAIL --------------------------------------------------------------------------------- -->
 	<div class="container">
+	
 		<div class="row">
 			<div class="panel panel-info">
 				<div class="panel-heading">Ticket Detail</div>
@@ -154,18 +159,18 @@ echo "
 					<div class="row">
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Ticket ID</label>
-							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($_POST["ticketID"]);?></text>
+							<text class="form-control" name="tickID" id="tickID" readonly disable=""><?php echo htmlspecialchars($_POST["ticketID"]);?></text>
 						</div>
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Ticket Topic</label>
-							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($objResult["TicketTopic"]);?></text>
+							<text class="form-control" name="tickTopic" id="tickTopic" readonly disable=""><?php echo htmlspecialchars($objResult["TicketTopic"]);?></text>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9">
 							<label class="control-label">Trouble Detail</label>
-							<textarea class="form-control" rows="6" style="resize: none;"readonly disabled><?php echo htmlspecialchars($objResult["TroubleDetail"]);?></textarea>
+							<textarea class="form-control" name="txtDetail" id="txtDetail" rows="6" style="resize: none;"readonly disabled><?php echo htmlspecialchars($objResult["TroubleDetail"]);?></textarea>
 						</div>
 					</div>
 
@@ -182,82 +187,84 @@ echo "
 				</div>
 			</div>
 		</div>
+		
 	</div>
 	<!-- ---------------------------------------------------------------------------------------------------------------- TICKET DESCRIPTION --------------------------------------------------------------------------------- -->
 	<div class="container">
-		<div class="row">
-			<div class="panel panel-warning">
-				<div class="panel-heading">Support Detail</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
-							<label class="control-label">Support By</label>
-							<text class="form-control" readonly disable="">
+		<form method="post" action="/ticket/chkupdateticket.php">
+			<div class="row">
+				<div class="panel panel-warning">
+					<div class="panel-heading">Support Detail</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
+								<label class="control-label">Support By</label>
+								<text class="form-control" readonly disable="">
 
-							<?php 
-							if($objResult["Support_By"] == null) echo "Not Yet";
-							else echo $objResult["Support_By"];
-							?>
+									<?php 
+									if($objResult["Support_By"] == null) echo "Not Yet";
+									else echo $objResult["Support_By"];
+									?>
 
-							</text>
+								</text>
+							</div>
+							<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
+								<label class="control-label">Support On</label>
+								<text class="form-control" readonly disable="">
+									<?php 
+									if($objResult["Support_On"] == null) echo "Not Yet";
+									else echo $objResult["Support_On"];
+									?>
+								</text>
+							</div>
 						</div>
-						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
-							<label class="control-label">Support On</label>
-							<text class="form-control" readonly disable="">
-							<?php 
-							date("Y-m-d H:i:s",time());
-							if($objResult["Support_On"] == null) echo "Not Yet";
-							?>
-							</text>
+
+						<?php
+
+						if($_SESSION["login"]["Class"] != "user")
+						{
+							echo "
+							<div class='row'>
+								<div class='col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9'>
+									<label class='control-label'>Trouble Detail</label>
+									<textarea class='form-control' name='txtUpdateDetail' id='txtUpdateDetail' autocomplete='off' minlength='6' rows='4' required style='resize: none;'></textarea>
+								</div>
+							</div>";
+						}
+						else 
+						{
+							echo "
+							<div class='row'>
+								<div class='col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9'>
+									<label class='control-label'>Trouble Detail</label>
+									<textarea class='form-control' name='txtUpdateDetail' id='txtUpdateDetail' autocomplete='off' minlength='6' rows='4' readonly style='resize: none;'></textarea>
+								</div>
+							</div>";
+						}
+
+						if($objResult["psrPath"] != null) echo "
+							<br>
+						<div class='row'>
+							<div class='col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4'>
+								<input class='btn btn-primary' type='button' value='Download PSR'>
+							</div>
 						</div>
+						<br>";
+
+						if($_SESSION["login"]["Class"] != "user") ConfirmUpdate();
+
+						?>
+
 					</div>
-
-					<?php
-
-					if($_SESSION["login"]["Class"] != "user")
-					{
-					echo "
-					<div class='row'>
-						<div class='col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9'>
-							<label class='control-label'>Trouble Detail</label>
-							<textarea class='form-control' name='txtDetail' id='txtDetail' autocomplete='off' minlength='6' rows='4' style='resize: none;'></textarea>
-						</div>
-					</div>";
-					}
-					else 
-					{
-						echo "
-					<div class='row'>
-						<div class='col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9'>
-							<label class='control-label'>Trouble Detail</label>
-							<textarea class='form-control' name='txtDetail' id='txtDetail' autocomplete='off' minlength='6' rows='4' readonly style='resize: none;'></textarea>
-						</div>
-					</div>";
-					}
-
-					if($objResult["psrPath"] != null) echo "
-						<br>
-					<div class='row'>
-						<div class='col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4'>
-							<input class='btn btn-primary' type='button' value='Download PSR'>
-						</div>
-					</div>
-					<br>";
-
-					if($_SESSION["login"]["Class"] != "user") ConfirmUpdate();
-
-					?>
-				
 				</div>
 			</div>
-		</div>
 
-		<div class="row center-block">
-			<a class="center-block btn btn-primary btn-lg" href="../index.php">Back to Home</a>
-		</div>
-
+			<div class="row center-block">
+				<a class="center-block btn btn-primary btn-lg" href="../index.php">Back to Home</a>
+			</div>
+			</form>
 	</div>
-
-
+	
+	
 </body>
 </html>
