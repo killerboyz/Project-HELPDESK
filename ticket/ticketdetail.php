@@ -49,26 +49,21 @@ function ConfirmUpdate()
 
 
 
-					if($objResult["Status"] == "Open") echo "
+					if($objResult["Status"] == "Open" || $objResult["Status"] == "Processing") echo "
 						<input class='btn btn-info disabled' name='status' id='status' type='submit' value='Open'>
-					<input class='btn btn-success' name='status' id='status' type='submit' value='Processing'>
-					<input class='btn btn-warning' name='status' id='status' type='submit' value='Solved'>
-					<input class='btn btn-danger' name='status' id='status' type='submit' value='Closed'>";
-					elseif ($objResult["Status"] == "Processing") echo "
-						<input class='btn btn-info disabled' name='status' id='status' type='submit' value='Open'>
-					<input class='btn btn-success' name='status' id='status' type='submit' value='Processing'>
-					<input class='btn btn-warning' name='status' id='status' type='submit' value='Solved'>
-					<input class='btn btn-danger' name='status' id='status' type='submit' value='Closed'>";
+						<input class='btn btn-success' name='status' id='status' type='submit' value='Processing'>
+						<input class='btn btn-warning' name='status' id='status' type='submit' value='Solved'>
+						<input class='btn btn-danger' name='status' id='status' type='submit' value='Closed'>";
 					elseif ($objResult["Status"] == "Solved") echo "
 						<input class='btn btn-info disabled' name='status' id='status' type='submit' value='Open'>
-					<input class='btn btn-success disabled' name='status' id='status' type='submit' value='Processing'>
-					<input class='btn btn-warning disabled' name='status' id='status' type='submit' value='Solved'>
-					<input class='btn btn-danger' id='status' name='status' type='submit' value='Closed'>";
+						<input class='btn btn-success disabled' name='status' id='status' type='submit' value='Processing'>
+						<input class='btn btn-warning disabled' name='status' id='status' type='submit' value='Solved'>
+						<input class='btn btn-danger' id='status' name='status' type='submit' value='Closed'>";
 					else echo "
 						<input class='btn btn-info disabled' name='status' type='submit' value='Open'>
-					<input class='btn btn-success disabled' name='status' type='submit' value='Processing'>
-					<input class='btn btn-warning disabled' name='status' type='submit' value='Solved'>
-					<input class='btn btn-danger disabled' name='status' type='submit' value='Closed'>";
+						<input class='btn btn-success disabled' name='status' type='submit' value='Processing'>
+						<input class='btn btn-warning disabled' name='status' type='submit' value='Solved'>
+						<input class='btn btn-danger disabled' name='status' type='submit' value='Closed'>";
 
 					
 					echo "<input type='hidden' name='tickID' id='tickID' value='".$_POST['ticketID']."''>
@@ -231,16 +226,21 @@ function ConfirmUpdate()
 								</div>
 							</div>";
 						}
-						else 
+						/*else 
 						{
+							$lbl = '';
+							if($objResult["Status"] == 'Closed') $lbl = 'label-default';
+							if($objResult["Status"] == 'Processing') $lbl = 'label-warning';
+							if($objResult["Status"] == 'Solved') $lbl = 'label-danger';
+							else $lbl = 'label-info';
+
 							echo "
 							<div class='row'>
 								<div class='col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9'>
-									<label class='control-label'>Trouble Detail</label>
-									<textarea class='form-control' name='txtUpdateDetail' id='txtUpdateDetail' autocomplete='off' minlength='6' rows='4' readonly style='resize: none;'></textarea>
+									<h1><span class='label ".$lbl."'>".$objResult["Status"]."</span></h1>
 								</div>
 							</div>";
-						}
+						}*/
 
 						if($objResult["psrPath"] != null) echo "
 							<br>
