@@ -11,11 +11,39 @@ if($_POST['ChkConfirm'] != "ABC")
 		</script>";
 	exit();
 }
+if($_FILES['psrUpload']['type'] != 'application/x-zip-compressed')
+{
+	echo "<script>
+		alert(\"PLEASE UPLOAD ONLY .ZIP FILE !!\");
+		window.history.back();
+		</script>";
+	exit();
+}
+
 
 $mysql = mysqlConnect();
 $strInsert = "INSERT INTO ticket (TicketTopic,TicketType,TroubleDetail,Priority,psrPath,Create_By)
 VALUES ('".$_POST["txtTopic"]."','".$_POST["Type"]."','".$_POST["txtDetail"]."','".$_POST["priLvl"]."',NULL,".$_SESSION["login"]["empID"].")";
 $mysql->query($strInsert);
+$ticketID = $mysql->insert_id;
+$psrPath = "psrFiles/psrOf_".$ticketID.".zip";
+if (isset($_FILES['psrUpload']))
+{
+
+	if ($_FILES['psrUpload']['name'] != '') 
+	{
+		global $psrPath;
+		if(move_uploaded_file($_FILES["psrUpload"]["tmp_name"],$psrPath));
+	}
+}
+$strUpdate = "UPDATE 
+					ticket 
+				SET 
+					psrPath='".$psrPath."'
+				WHERE 
+					TicketID='".$ticketID."'";
+$mysql->query($strUpdate);
+
 
 
 
@@ -62,7 +90,7 @@ $mysql->query($strInsert);
 						<div class="row">
 							<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 								<label class="control-label" for="TicketID">Ticket ID</label>
-								<text class="form-control" readonly disable=""><?php echo htmlspecialchars($mysql->insert_id);?></text>
+								<text class="form-control" readonly disable=""><?php echo htmlspecialchars($ticketID);?></text>
 							</div>
 							<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 								<label class="control-label" for="TicketTopic">Ticket Topic</label>

@@ -242,14 +242,16 @@ function ConfirmUpdate()
 							</div>";
 						}*/
 
-						if($objResult["psrPath"] != null) echo "
+						if($objResult["psrPath"] != null) 
+							echo "
 							<br>
-						<div class='row'>
-							<div class='col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4'>
-								<input class='btn btn-primary' type='button' value='Download PSR'>
-							</div>
-						</div>
-						<br>";
+								<div class='row'>
+									<div class='col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4'>
+										<a href='".$objResult["psrPath"]."' class='btn btn-primary' download>Download PSR</a>
+									</div>
+								</div>
+							<br>";
+							
 
 						if($_SESSION["login"]["Class"] != "user") ConfirmUpdate();
 

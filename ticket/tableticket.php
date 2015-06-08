@@ -41,7 +41,7 @@ if($last != 1)
 	if($pagenum > 1) 
 	{
 		$paginationCtrls .= "<li><a href=".$_SERVER['PHP_SELF']."?page=1>«</a></li>\n";
-		for ($i=$pagenum-4; $i < $pagenum; $i++) 
+		for ($i=$pagenum-1; $i < $pagenum; $i++) 
 		{ 
 			if ($i > 0) $paginationCtrls .= "<li><a href=".$_SERVER['PHP_SELF']."?page=".$i.">".$i."</a></li>\n";
 		}
@@ -52,11 +52,13 @@ if($last != 1)
 	for ($i=$pagenum+1; $i < $last; $i++)
 	{ 
 		$paginationCtrls .= "<li><a href=".$_SERVER['PHP_SELF']."?page=".$i.">".$i."</a></li>\n";
-		if($i >= $pagenum+4) break;
+		if($i >= $pagenum+1) break;
+
 	}
 	if($pagenum != $last)
 	{
-		$next = $pagenum + 1;
+		$next = $pagenum+1;
+		if($pagenum == ($last-1)) $paginationCtrls .= "<li><a href=".$_SERVER['PHP_SELF']."?page=".$last.">".$last."</a></li>\n";
 		$paginationCtrls .= "<li><a href=".$_SERVER['PHP_SELF']."?page=".$last.">»</a></li>\n";
 	}
 }

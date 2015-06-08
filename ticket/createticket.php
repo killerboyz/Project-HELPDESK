@@ -52,7 +52,7 @@ require "../function/function.php";
   </div>
 
   <div class="container">
-    <form name="CreateTicket" method="post" action="/ticket/chkcreateticket.php">
+    <form name="CreateTicket" method="post" enctype="multipart/form-data" action="/ticket/chkcreateticket.php" >
       <div class="row">
         <div class="col-md-12">
           <div class="panel panel-danger ">
@@ -85,7 +85,7 @@ require "../function/function.php";
               <div class="row">
                 <div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
                   <label class="control-label">Upload PSR file</label>
-                  <input type="file" id="psrUpload" class="filestyle" data-buttonName="btn-primary" data-iconName="glyphicon-inbox"  data-size="md" accept=".zip">
+                  <input type="file" name="psrUpload" class="filestyle" data-buttonName="btn-primary" data-iconName="glyphicon-inbox"  data-size="md" accept=".zip">
 
                 </div>
               </div>
