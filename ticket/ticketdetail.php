@@ -43,7 +43,7 @@ function ConfirmUpdate()
 			<label class='control-label'>Confirm Update</label>
 			<div class='input-group'>
 				<span class='input-group-addon'>Type Password</span>
-				<input type='password' class='form-control' name='chkPassword' id='chkPassword' autocomplete='off' minlength='5' required onmouseover='mouseoverPass();'' onmouseout='mouseoutPass();''>
+				<input type='password' class='form-control' name='txtPassword' id='txtPassword' autocomplete='off' minlength='5' required onmouseover='mouseoverPass();'' onmouseout='mouseoutPass();''>
 				<span class='input-group-btn'>";
 
 
@@ -94,12 +94,12 @@ function ConfirmUpdate()
 	<script>
 		function mouseoverPass(obj) 
 		{
-			var obj = document.getElementById('chkPassword');
+			var obj = document.getElementById('txtPassword');
 			obj.type = "text";
 		}
 		function mouseoutPass(obj)
 		{
-			var obj = document.getElementById('chkPassword');
+			var obj = document.getElementById('txtPassword');
 			obj.type = "password";
 		}
 	</script>

@@ -62,6 +62,11 @@ function logout()
 	header("location: ../index.php");
 }
 
+/*function CheckPermission();
+{
+
+}*/
+
 function navLogin()
 {
 	if($_SESSION["login"]["Class"] == "admin")
@@ -90,7 +95,7 @@ function navLogin()
 			<ul class="dropdown-menu" role="menu">
 				<li><a href="/user/createuser.php">Create USER</a></li>
 				<li class="divider"></li>
-				<li><a href="#">Edit User</a></li>
+				<li><a href="/user/tableuser.php">Edit User</a></li>
 			</ul>
 		</li>
 STR;

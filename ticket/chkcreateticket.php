@@ -11,14 +11,6 @@ if($_POST['ChkConfirm'] != "ABC")
 		</script>";
 	exit();
 }
-if($_FILES['psrUpload']['type'] != 'application/x-zip-compressed')
-{
-	echo "<script>
-		alert(\"PLEASE UPLOAD ONLY .ZIP FILE !!\");
-		window.history.back();
-		</script>";
-	exit();
-}
 
 
 $mysql = mysqlConnect();
@@ -27,22 +19,23 @@ VALUES ('".$_POST["txtTopic"]."','".$_POST["Type"]."','".$_POST["txtDetail"]."',
 $mysql->query($strInsert);
 $ticketID = $mysql->insert_id;
 $psrPath = "psrFiles/psrOf_".$ticketID.".zip";
+
 if (isset($_FILES['psrUpload']))
 {
-
 	if ($_FILES['psrUpload']['name'] != '') 
 	{
 		global $psrPath;
 		if(move_uploaded_file($_FILES["psrUpload"]["tmp_name"],$psrPath));
 	}
-}
-$strUpdate = "UPDATE 
+	$strUpdate = "UPDATE 
 					ticket 
 				SET 
 					psrPath='".$psrPath."'
 				WHERE 
 					TicketID='".$ticketID."'";
-$mysql->query($strUpdate);
+	$mysql->query($strUpdate);
+}
+
 
 
 

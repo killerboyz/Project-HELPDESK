@@ -67,9 +67,9 @@ require "../function/function.php";
                 <div class="col-xs-5 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">
                   <label for="select" class="control-label">Type</label>
                   <select class="form-control" name="Type" id="Type" tabindex="2">
-                    <option value="Program A">Program A</option>
-                    <option value="Program B">Program B</option>
-                    <option value="Program C">Program C</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Software">Software</option>
+                    
                   </select>
                 </div>
               </div>
