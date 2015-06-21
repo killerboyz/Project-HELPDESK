@@ -2,6 +2,8 @@
 session_start();
 require "../function/function.php";
 include "../config/database.php";
+
+
 $mysql = mysqlConnect();
 $strSQL = "SELECT 
 				T.TicketID,
@@ -28,10 +30,15 @@ $strSQL = "SELECT
 			ON 
 				T.Support_By = E2.empID
 			WHERE 
-				TicketID='".$_POST["ticketID"]."'";
+				TicketID='".$_GET["ticketID"]."'";
 
 $objResult = mysqli_fetch_assoc($mysql->query($strSQL));
 
+if($_SESSION["login"]["Class"] == "user") 
+	{
+		if($objResult["Create_By"] != $_SESSION["login"]["empName"]) header('Location: /ticket/tableticket.php');
+	}
+	
 function ConfirmUpdate()
 {
 	global $objResult;
@@ -66,7 +73,7 @@ function ConfirmUpdate()
 						<input class='btn btn-danger disabled' name='status' type='submit' value='Closed'>";
 
 					
-					echo "<input type='hidden' name='tickID' id='tickID' value='".$_POST['ticketID']."''>
+					echo "<input type='hidden' name='tickID' id='tickID' value='".$_GET['ticketID']."''>
 				</span>
 			</div>
 		</div>
@@ -154,7 +161,7 @@ function ConfirmUpdate()
 					<div class="row">
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Ticket ID</label>
-							<text class="form-control" name="tickID" id="tickID" readonly disable=""><?php echo htmlspecialchars($_POST["ticketID"]);?></text>
+							<text class="form-control" name="tickID" id="tickID" readonly disable=""><?php echo htmlspecialchars($_GET["ticketID"]);?></text>
 						</div>
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Ticket Topic</label>
@@ -247,7 +254,7 @@ function ConfirmUpdate()
 							<br>
 								<div class='row'>
 									<div class='col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4'>
-										<a href='".$objResult["psrPath"]."' class='btn btn-primary' download>Download PSR</a>
+										<a href='".$objResult["psrPath"]."' class='btn btn-primary' download>DOWNLOAD PSR FILE</a>
 									</div>
 								</div>
 							<br>";

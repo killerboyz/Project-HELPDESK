@@ -4,10 +4,57 @@ require "../function/function.php";
 include "../config/database.php";
 
 $mysql = mysqlConnect();
+if(!empty($_GET["search"]))
+{
+	//if(isset($_GET["search"]) == "") header('Location: /ticket/tableticket.php'); 
+	$search=$_GET["search"];
+	$result = $mysql->query("SELECT 
+									* 
+								FROM 
+									emp
+								WHERE
+									empID = '".$search."'
+								OR 
+									empName LIKE '%".$search."'
+								OR
+									empEmail LIKE '%".$search."'
+								OR
+									empTel = '".$search."'");
 
-$count = $mysql->query("SELECT COUNT(*) FROM emp ORDER BY Class ASC, empID ASC");
-
-
+	$gentable = '';
+	while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) 
+	{	
+		if($row['Class'] == "admin") 
+		{
+			$hilight = "<tr class='danger'>\n";
+			$class = "<td><h4><span class='label label-danger'>Admin</span></h></td>\n";
+		}
+		else if($row['Class'] == "support")
+		{ 
+			$hilight = "<tr class='warning'>\n";
+			$class = "<td><h4><span class='label label-warning'>Support</span></h></td>\n";
+		}
+		else 
+		{
+			$hilight = "<tr class='active'>\n";
+			$class = "<td><h4><span class='label label-info'>User</span></h></td>\n";
+		}
+		////////////////////////////////////////////////////////////////////////////////////////////////////////// Class
+		
+		$gentable .= "<form method='post' action='../user/userdetail.php'>\n".
+		$hilight.
+		"<td><h4>".$row['empID']."</h></td>\n".
+		"<td><h4>".$row['username']."</h></td>\n".
+		"<td><h4>".$row['empName']."</h></td>\n".
+		"<td><input class='btn btn-primary' type='submit' value='Click for Detail'></input></td>\n".
+		$class.
+		"<input type='hidden' name='empID' value='".$row['empID']."'>\n</tr>\n</form>\n\n";
+	}
+	$paginationCtrls = '';
+}
+else
+{
+	$count = $mysql->query("SELECT COUNT(*) FROM emp ORDER BY Class ASC, empID ASC");
 $row = mysqli_fetch_row($count); // fetch row
 $rows = $row[0]; // rows count
 $page_rows = 10; // per page
@@ -19,7 +66,6 @@ if($pagenum < 1 ) $pagenum = 1;
 else if($pagenum > $last) $pagenum = $last; // range of row to query for the chosen $pagenum
 $limit = 'LIMIT '.($pagenum - 1) * $page_rows.','.$page_rows; // limit page_rows
 $result = $mysql->query("SELECT empID, username, empName, Class FROM emp ORDER BY Class ASC, empID ASC $limit"); // query
-
 
 $paginationCtrls = '';
 if($last != 1) 
@@ -68,16 +114,16 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////// Class
 	
-    $gentable .= "<form method='post' action='../user/userdetail.php'>\n".
-					$hilight.
-					"<td><h4>".$row['empID']."</h></td>\n".
-					"<td><h4>".$row['username']."</h></td>\n".
-					"<td><h4>".$row['empName']."</h></td>\n".
-					"<td><input class='btn btn-primary' type='submit' value='Click for Detail'></input></td>\n".
-					$class.
-					"<input type='hidden' name='empID' value='".$row['empID']."'>\n</tr>\n</form>\n\n";
+	$gentable .= "<form method='post' action='../user/userdetail.php'>\n".
+	$hilight.
+	"<td><h4>".$row['empID']."</h></td>\n".
+	"<td><h4>".$row['username']."</h></td>\n".
+	"<td><h4>".$row['empName']."</h></td>\n".
+	"<td><input class='btn btn-primary' type='submit' value='Click for Detail'></input></td>\n".
+	$class.
+	"<input type='hidden' name='empID' value='".$row['empID']."'>\n</tr>\n</form>\n\n";
 	
-
+}
 }
 
 
@@ -110,6 +156,19 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 
 	<div class="container">
 		<div class="row">
+			<form method='get' action="tableuser.php?search" id='searchuser'>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon">Search User</span>
+						<input type="search" class="form-control" name="search" placeholder="Employee Detail here ... ">
+						<span class="input-group-btn">
+							<button class="btn btn-success" type="sumbit">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</button>
+						</span>
+					</div>
+				</div>
+			</form>
 
 			<table class="table table-hover">
 				<thead>

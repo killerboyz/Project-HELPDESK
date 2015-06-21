@@ -3,11 +3,11 @@ session_start();
 require "../function/function.php";
 include "../config/database.php";
 
-if(htmlspecialchars($_POST['chkPassword']) != $_SESSION["login"]["pwd"])
+if(htmlspecialchars($_POST['txtPassword']) != $_SESSION["login"]["pwd"])
 {
 	echo "<script>
 		alert(\"Please type Your Password !!\");
-		window.history.back();
+		window.location.hostname;
 		</script>";
 	exit();
 }
@@ -16,7 +16,7 @@ if($_POST["txtUpdateDetail"] == null )
 {
 	echo "<script>
 		alert(\"Please Update !!\");
-		window.history.back();
+		window.location.hostname;
 		</script>";
 	exit();
 }
