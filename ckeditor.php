@@ -15,8 +15,17 @@
                 // Replace the <textarea id="editor1"> with a CKEditor
                 // instance, using default configuration.
                 CKEDITOR.replace( 'editor1',{
-                  "filebrowserImageUploadUrl": "/path_to/ckeditor/plugins/imgupload.php"
+                    extraPlugins: 'image2',
+
+                // Upload images to a CKFinder connector (note that the response type is set to JSON).
+                //uploadUrl: '/ckeditor/kcfinder/upload.php?opener=ckeditor&type=files'
+                              
                 });
+
+                
+                /*CKEDITOR.replace( 'editor1',{
+                  "filebrowserImageUploadUrl": "/path_to/ckeditor/plugins/imgupload.php"
+                });*/
             </script>
         </form>
     </body>

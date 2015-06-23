@@ -4,11 +4,11 @@ require "../function/function.php";
 include "../config/database.php";
 $mysql = mysqlConnect();
 $strSQL = "SELECT 
-* 
-FROM 
-emp 
-WHERE
-empID='".$_POST["empID"]."'";
+				* 
+			FROM 
+				emp 
+			WHERE
+				empID='".$_POST["empID"]."'";
 
 $objResult = mysqli_fetch_assoc($mysql->query($strSQL));
 

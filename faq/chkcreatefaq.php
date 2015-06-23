@@ -3,20 +3,24 @@ session_start();
 require "../function/function.php";
 include "../config/database.php";
 
-$mysql = mysqlConnect();
-//$strInsert = "INSERT INTO faq (`col`)
-//VALUES ('".$_POST["post]."')";
-
-//$mysql->query($strInsert);
-
 if($_POST['ChkConfirm'] != "ABC")
 {
 	echo "<script>
-		alert(\"Please type ABC !!\");
-		window.history.back();
-		</script>";
-	exit();
+	alert(\"Please type ABC !!\");
+	window.history.back();
+</script>";
+exit();
 }
+
+$mysql = mysqlConnect();
+$strInsert = "INSERT INTO 
+						faq (faqTopic, faqType, faqDescript, Create_By) 
+					VALUES 
+						('".$_POST["FAQtopic"]."', '".$_POST["Type"]."', '".htmlspecialchars($_POST['FAQdescript'],ENT_HTML5)."', '".$_SESSION["login"]["empName"]."')";
+
+$mysql->query($strInsert);
+
+
 
 ?>
 
@@ -57,33 +61,29 @@ if($_POST['ChkConfirm'] != "ABC")
 		<div class="row">
 			<div class="panel panel-info">
 				<div class="panel-heading">FAQ Detail</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-xs-4 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">
-								<label class="control-label" for="FAQID">FAQ ID</label>
-								<text class="form-control" readonly disable=""><?php echo htmlspecialchars($mysql->insert_id);?></text>
-							</div>
-							<div class="col-xs-4 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">
-								<label class="control-label" for="FAQtopic">FAQ Topic</label>
-								<text class="form-control" readonly disable=""><?php echo htmlspecialchars($_POST['FAQtopic']);?></text>
+				<div class="panel-body">
+					<div class="row">
 
-							</div>
+						<div class="col-xs-4 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">
+							<label class="control-label">FAQ Topic</label>
+							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($_POST['FAQtopic']);?></text>
 						</div>
+						<div class="col-xs-4 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">
+							<label class="control-label">FAQ Topic</label>
+							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($_POST['Type']);?></text>
 
-						<div class="row">
-							<div class="col-xs-8 col-sd-offset-1 col-sd-8 col-md-offset-1 col-md-8">
-								<label class="control-label" for="FAQdescript">FAQ Description</label>
-								<textarea class="form-control" rows="8" readonly disabled><?php echo htmlspecialchars($_POST['FAQdescript'],ENT_HTML5);?></textarea>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-xs-2 col-sd-offset-1 col-sd-1 col-md-offset-1 col-md-2">
-								<label class="control-label" for="Type">Type</label>
-								<text class="form-control" readonly disable=""><?php echo htmlspecialchars($_POST['Type']);?></text>
-							</div>
 						</div>
 					</div>
+
+					<div class="row">
+						<div class="col-xs-8 col-sd-offset-1 col-sd-8 col-md-offset-1 col-md-9">
+							<label class="control-label" for="FAQdescript">FAQ Description</label>
+							<textarea class="form-control" rows="8" readonly disabled><?php echo htmlspecialchars($_POST['FAQdescript'],ENT_HTML5);?></textarea>
+						</div>
+					</div>
+
+					
+				</div>
 			</div>
 		</div>
 		

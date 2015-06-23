@@ -15,11 +15,14 @@ if(!empty($_GET["search"]))
 								WHERE
 									empID = '".$search."'
 								OR 
-									empName LIKE '%".$search."'
+									empName LIKE '%".$search."%'
 								OR
-									empEmail LIKE '%".$search."'
+									empEmail LIKE '%".$search."%'
 								OR
-									empTel = '".$search."'");
+									empTel = '".$search."'
+								ORDER BY 
+									Class ASC, 
+									empID ASC");
 
 	$gentable = '';
 	while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) 
@@ -54,7 +57,7 @@ if(!empty($_GET["search"]))
 }
 else
 {
-	$count = $mysql->query("SELECT COUNT(*) FROM emp ORDER BY Class ASC, empID ASC");
+$count = $mysql->query("SELECT COUNT(*) FROM emp ORDER BY Class ASC, empID ASC");
 $row = mysqli_fetch_row($count); // fetch row
 $rows = $row[0]; // rows count
 $page_rows = 10; // per page
@@ -160,7 +163,7 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 				<div class="form-group">
 					<div class="input-group">
 						<span class="input-group-addon">Search User</span>
-						<input type="search" class="form-control" name="search" placeholder="Employee Detail here ... ">
+						<input type="search" class="form-control" name="search" placeholder="Employee Detail here ... " autocomplete="off">
 						<span class="input-group-btn">
 							<button class="btn btn-success" type="sumbit">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -174,8 +177,8 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>username</th>
-						<th>empName</th>
+						<th>Username</th>
+						<th>Employee Name</th>
 						<th>Detail</th>
 						<th>Class</th>
 					</tr>

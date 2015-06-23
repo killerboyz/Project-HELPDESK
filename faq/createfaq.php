@@ -39,7 +39,7 @@ require "../function/function.php";
             <div class="row">
               <div class="col-xs-6 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">    
                 <label class="control-label" for="EmpName">Employee Name</label>
-                <input class="form-control" id="EmpName" placeholder="EmpName" type="text" disabled="" value="<?php echo htmlspecialchars($_SESSION["login"]["empName"]);?>">
+                <input class="form-control" id="EmpName" placeholder="EmpName" type="text" disabled="" value="<?php echo $_SESSION["login"]["empName"];?>">
               </div>
             </div>
           </div>
@@ -49,7 +49,7 @@ require "../function/function.php";
   </div>
 
   <div class="container">
-    <form name="CreateTicket" method="post" action="../chk/chkcreatefaq.php">
+    <form name="CreateTicket" method="post" action="../faq/chkcreatefaq.php">
       <div class="row">
         <div class="col-md-12">
           <div class="panel panel-danger ">
@@ -59,14 +59,13 @@ require "../function/function.php";
               <div class="row">
                <div class="col-xs-4 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4 form-group has-warning">
                 <label class="control-label" for="faqTopic">FAQ Topic</label>
-                <input class="form-control" name="FAQtopic" id="FAQtopic"  type="text" placeholder="FAQ Topic" minlength="6" maxlength="50" autocomplete="off" title="Allow only lowercase letters and numbers. At least 6 letters." pattern=".{6,50}" tabindex="1" required>
+                <input class="form-control" name="FAQtopic" type="text" placeholder="FAQ Topic" minlength="6" maxlength="50" autocomplete="off" title="Allow only lowercase letters and numbers. At least 6 letters." pattern=".{6,50}" tabindex="1" required>
               </div>
               <div class="col-xs-4 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4">
                 <label for="select" class="control-label">Type</label>
                 <select class="form-control" name="Type" id="Type">
-                  <option>Program A</option>
-                  <option>Program B</option>
-                  <option>Program C</option>
+                  <option value="Hardware">Hardware</option>
+                  <option value="Software" selected="selected">Software</option>
                 </select>
               </div>
             </div>
@@ -74,13 +73,17 @@ require "../function/function.php";
             <div class="row">
               <div class="col-xs-10 col-sd-push-1 col-sd-10 col-md-push-1 col-md-10">
                 <label for="TroubleDetail">FAQ Detail</label>
-                <textarea class="form-control" rows="20" cols="" name="FAQdescript" id="FAQdescript" >Input FAQ in here ..</textarea>
+                <textarea class="form-control" rows="20" cols="" name="FAQdescript" id="FAQdescript" >Design FAQ in here ..</textarea>
                 <script>
-                  // Replace the <textarea id="editor1"> with a CKEditor
-                  // instance, using default configuration.
-                  CKEDITOR.replace( 'FAQdescript',{
-                  "filebrowserImageUploadUrl": "/path_to/ckeditor/plugins/imgupload.php"
-                } );
+                    // Replace the <textarea id="editor1"> with a CKEditor
+                    // instance, using default configuration.
+                    CKEDITOR.replace( 'FAQdescript',{
+                        extraPlugins: 'image2'//,
+
+                        // Upload images to a CKFinder connector (note that the response type is set to JSON).
+                        // uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+                                  
+                    });
                 </script>
                 <span class="help-block">Input FAQ in here ..</span>
               </div>

@@ -48,7 +48,7 @@ STR;
   <div class="col-sm-3 col-sm-offset-1 col-md-1 col-md-offset-1 btn-group-vertical" role="group">
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-       Windows
+       Hardware
        <span class="caret"></span>
      </button>
      <ul class="dropdown-menu" role="menu">
@@ -59,7 +59,7 @@ STR;
 
    <div class="btn-group" role="group">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-     Program
+     Software
      <span class="caret"></span>
    </button>
    <ul class="dropdown-menu" role="menu">
