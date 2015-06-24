@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "../function/function.php";
-include "../config/database.php";
+include "../function/database.php";
 
 $mysql = mysqlConnect();
 $chkUser = mysqli_fetch_array($mysql->query("SELECT 'username' FROM emp WHERE username = '".mysql_real_escape_string($_POST['txtUsername'])."'"),MYSQLI_ASSOC);

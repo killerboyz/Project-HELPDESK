@@ -3,22 +3,28 @@ session_start();
 require "../function/function.php";
 include "../function/database.php";
 
-if($_POST['ChkConfirm'] != "ABC")
+if($_POST['ChkConfirm'] != "CONFIRM")
 {
 	echo "<script>
-	alert(\"Please type ABC !!\");
+	alert(\"Please type CONFIRM !!\");
 	window.history.back();
 </script>";
 exit();
 }
 
 $mysql = mysqlConnect();
-$strInsert = "INSERT INTO 
-						faq (faqTopic, faqType, faqDescript, Create_By) 
-					VALUES 
-						('".$_POST["FAQtopic"]."', '".$_POST["Type"]."', '".htmlspecialchars($_POST['FAQdescript'],ENT_HTML5)."', '".$_SESSION["login"]["empName"]."')";
 
-$mysql->query($strInsert);
+$strUpdate = "UPDATE
+					faq
+				SET 
+					faqTopic='".$_POST["FAQtopic"]."',
+					faqType='".$_POST["Type"]."',
+					faqDescript='".htmlspecialchars($_POST['FAQdescript'],ENT_HTML5)."',
+					Edit_By='".$_SESSION["login"]["empName"]."',
+					Edit_On='".date("Y-m-d H:i:s",time())."'
+				WHERE
+					faqID='".$_POST["FAQid"]."'";
+$mysql->query($strUpdate);
 
 
 
@@ -57,7 +63,7 @@ $mysql->query($strInsert);
 		<div class="row">
 			<div class="alert alert-dismissible alert-success">
 				<button type="button" class="close" data-dismiss="alert">×</button>
-				<strong>Well done!</strong> You Create FAQ Successfully.
+				<strong>Well done!</strong> You Edit FAQ Successfully.
 			</div>
 		</div>
 	</div>
@@ -82,7 +88,7 @@ $mysql->query($strInsert);
 					<?php echo $_POST['FAQdescript'];?>
 					<br><hr>
 					<div class="pull-right">
-						<h4><small>Create By </small><?php echo $_SESSION["login"]["empName"];?></h4>
+						<h4><small>Edit By </small><?php echo $_SESSION["login"]["empName"];?></h4>
 					</div>
 				</div>
 			</div>

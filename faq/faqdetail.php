@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "../function/function.php";
-include "../config/database.php";
+include "../function/database.php";
 
 
 $mysql = mysqlConnect();
@@ -34,6 +34,18 @@ $objResult = mysqli_fetch_assoc($mysql->query($strSQL));
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="../js/bootstrap.min.js"></script>
+	<style>
+		img {
+				max-width: 100%;
+				height: auto !important;
+			}
+		hr {
+			display: block; height: 1px;
+    		border: 0; border-top: 1px solid #ccc;
+    	margin: 1em 0; padding: 0;
+			}
+		
+	</style>
 	
 </head>
 
@@ -44,56 +56,65 @@ $objResult = mysqli_fetch_assoc($mysql->query($strSQL));
 	<!-- ---------------------------------------------------------------------------------------------------------------- NAVIGATOR BAR --------------------------------------------------------------------------------- -->
 	
 	
-	<!-- ---------------------------------------------------------------------------------------------------------------- TICKET DETAIL --------------------------------------------------------------------------------- -->
+	<!-- ---------------------------------------------------------------------------------------------------------------- FAQ DETAIL --------------------------------------------------------------------------------- -->
 	
 	<div class="container">
 		<div class="row">
 
 			<div class="page-header">
+				<?php
+				if($_SESSION["login"]["Class"] != "user")
+				{
+					echo "<div class='pull-right'>
+					<a href='/faq/editfaq.php?faqid=".$objResult["faqID"]."' class='btn btn-info'>EDIT THIS FAQ</a>
+				</div>";
+				}
+				?>
+				
 				<h1><?php echo $objResult["faqTopic"];?></h1>
+				
 			</div>
+
 			
 			<div class="jumbotron">
-				<?php echo htmlspecialchars_decode($objResult["faqDescript"],ENT_HTML5);?>
-				<br><hr>
-
-				<div class="pull-right">
-					<h4><small>Create On </small><?php echo $objResult["Create_On"];?>
-					<small>By </small> <?php echo $objResult["Create_By"];?></h4>
-				</div>
+				<div class="container">
+					<div class="row">
+					<?php echo htmlspecialchars_decode($objResult["faqDescript"],ENT_HTML5);?>
+					
+					</div>
+					<hr>
+					<div class="row">
+						<div class="pull-right">
+							<h5><small>Create On </small><?php echo $objResult["Create_On"];?>
+							<small>By </small><?php echo $objResult["Create_By"];?></h5>
+							
+							<?php
+							if ($objResult["Edit_By"] != NULL) 
+							{
+								echo "
+									<div class='pull-right'>
+									<h6><small>Last Edit On </small>".$objResult['Edit_On']."
+									<small>By </small>".$objResult['Edit_By']."</h6>
+									</div>";
+							}
+							?>
+						</div>
+					</div>
+				
 			</div>
 
 		</div>
 	</div>
-	<!-- ---------------------------------------------------------------------------------------------------------------- TICKET DESCRIPTION --------------------------------------------------------------------------------- -->
-	<div class="container">
-		
-		<!-- <div class="row">
-			<div class="panel panel-warning">
-				<div class="panel-heading">Creator Detail</div>
-				<div class="panel-body">
 
-					<div class="row">
 
-						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
-							<label class="control-label">Create By</label>
-							<text class="form-control" readonly disable=""><?php echo $objResult["Create_By"];?></text>
-						</div>
-						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
-							<label class="control-label">Create On</label>
-							<text class="form-control" readonly disable=""><?php echo $objResult["Create_On"];?></text>
-						</div>
-
-					</div>
-				</div>
-			</div> -->
-
-			<div class="row center-block">
+	
+		<div class="row">
+			<div class="center-block">
 				<a class="center-block btn btn-primary btn-lg" href="../index.php">Back to Home</a>
 			</div>
-
 		</div>
+	</div>
 
 
-	</body>
-	</html>
+</body>
+</html>

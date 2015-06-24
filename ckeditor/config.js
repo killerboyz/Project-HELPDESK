@@ -40,4 +40,16 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
+
+	// add extraPlugin
+	extraPlugins = 'image2';
+
+	// add class to img tag
+	config.allowedContent = true;
+	config.extraAllowedContent = 'img (img-responsive)';
+
+	// set height for ckeditor
+	config.height = 500;
+
+	
 };

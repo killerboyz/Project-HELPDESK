@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "../function/function.php";
-include "../config/database.php";
+include "../function/database.php";
 
 if(htmlspecialchars($_POST['txtPassword']) != $_SESSION["login"]["pwd"])
 {

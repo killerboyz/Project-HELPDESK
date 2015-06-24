@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "../function/function.php";
-include "../config/database.php";
+include "../function/database.php";
 header("refresh:180;url=../ticket/tableticket.php");
 
 $mysql = mysqlConnect();

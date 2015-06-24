@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "../function/function.php";
-include "../config/database.php";
+include "../function/database.php";
 
 $mysql = mysqlConnect();
 if(!empty($_GET["search"]))
@@ -16,7 +16,7 @@ if(!empty($_GET["search"]))
 								OR 
 									faqTopic LIKE '%".$search."%'
 								OR
-									Create_By= '".$search."'
+									Create_By LIKE '%".$search."%'
 								ORDER BY
 									Create_On DESC,
 									faqID ASC");
@@ -29,7 +29,7 @@ if(!empty($_GET["search"]))
 								OR 
 									faqTopic LIKE '%".$search."%'
 								OR
-									Create_By= '".$search."'
+									Create_By LIKE '%".$search."%'
 								ORDER BY
 									Create_On DESC,
 									faqID ASC");
@@ -52,7 +52,7 @@ if(!empty($_GET["search"]))
 								OR 
 									faqTopic LIKE '%".$search."%'
 								OR
-									Create_By= '".$search."'
+									Create_By LIKE '%".$search."%'
 								ORDER BY
 									Create_On DESC,
 									faqID ASC 
@@ -85,30 +85,22 @@ if(!empty($_GET["search"]))
 			if($pagenum == ($last-1)) $paginationCtrls .= "<li><a href=".$strValue."?page=".$last.">".$last."</a></li>\n";
 			$paginationCtrls .= "<li><a href=".$strValue."?page=".$last.">»</a></li>\n";
 		}
+	}
 		
-		$gentable = '';
-		while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) 
-		{	
-			if($row['faqType'] == "Hardware") 
-			{
-				$hilight = "<tr class='info'>\n";
-				$type = "<td><h4><span class='label label-danger'>Hardware</span></h></td>\n";
-			}
-			else if($row['faqType'] == "Software")
-			{ 
-				$hilight = "<tr class='success'>\n";
-				$type = "<td><h4><span class='label label-warning'>Software</span></h></td>\n";
-			}
-			////////////////////////////////////////////////////////////////////////////////////////////////////////// Type
-			$gentable .= "<form method='get' action='../faq/faqdetail.php'>\n".
-			$hilight.
-			"<td><h4>".$row['faqTopic']."</h></td>\n".
-			$type.
-			"<td><input class='btn btn-primary' type='submit' value='Click for Detail'></input></td>\n
-			<td><h4>".$row['Create_By']."</h></td>\n
-			<input type='hidden' name='faqID' value='".$row['faqID']."'>\n</tr>\n</form>\n\n";
-		}
-		$paginationCtrls = '';
+	$gentable = '';
+	while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) 
+	{	
+		if($row['faqType'] == "Hardware") $hilight = "<tr class='info'>\n";
+		else if($row['faqType'] == "Software")$hilight = "<tr class='success'>\n";
+		////////////////////////////////////////////////////////////////////////////////////////////////////////// Type
+		$gentable .= "<form method='get' action='../faq/faqdetail.php'>\n".
+		$hilight.
+		"<td><h4>".$row['faqTopic']."</h></td>\n".
+		"<td><h4><span class='label label-danger'>".$row['faqType']."</span></h></td>\n".
+		"<td><input class='btn btn-primary' type='submit' value='Click for Detail'></input></td>\n
+		<td><h4>".$row['Create_By']."</h></td>\n
+		<input type='hidden' name='faqID' value='".$row['faqID']."'>\n</tr>\n</form>\n\n";
+		
 	}
 }
 else
@@ -160,21 +152,13 @@ else
 	$gentable = '';
 	while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) 
 	{	
-		if($row['faqType'] == "Hardware") 
-		{
-			$hilight = "<tr class='info'>\n";
-			$type = "<td><h4><span class='label label-danger'>Hardware</span></h></td>\n";
-		}
-		else if($row['faqType'] == "Software")
-		{ 
-			$hilight = "<tr class='success'>\n";
-			$type = "<td><h4><span class='label label-warning'>Software</span></h></td>\n";
-		}
+		if($row['faqType'] == "Hardware") $hilight = "<tr class='info'>\n";
+		else if($row['faqType'] == "Software") $hilight = "<tr class='success'>\n";
 	////////////////////////////////////////////////////////////////////////////////////////////////////////// Type
 		$gentable .= "<form method='get' action='../faq/faqdetail.php'>\n".
 		$hilight.
 		"<td><h4>".$row['faqTopic']."</h></td>\n".
-		$type.
+		"<td><h4><span class='label label-danger'>".$row['faqType']."</span></h></td>\n".
 		"<td><input class='btn btn-primary' type='submit' value='Click for Detail'></input></td>\n
 		<td><h4>".$row['Create_By']."</h></td>\n
 		<input type='hidden' name='faqID' value='".$row['faqID']."'>\n</tr>\n</form>\n\n";

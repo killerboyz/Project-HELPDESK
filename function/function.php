@@ -1,4 +1,39 @@
 <?php
+if(isset($_GET['logout']))
+{
+	session_start();
+	session_unset();
+	session_destroy();
+	header("location: ../index.php");
+}
+
+if(isset($_GET['login']))
+{
+	session_start();
+	include '../function/database.php';
+
+	$mysql = mysqlConnect();
+	$objResult = mysqli_fetch_assoc($mysql->query("SELECT * FROM emp WHERE username = '".mysql_real_escape_string($_POST['txtUser'])."' and password = '".mysql_real_escape_string($_POST['txtPass'])."'"));
+
+	if(!$objResult) {
+		echo 	"<script>
+		alert(\"Username or Password Incorrect !!\");
+		window.location = \"../index.php\";
+	</script>";
+	exit();
+	}
+	$_SESSION["login"] = array(
+								"Class" => $objResult["Class"],
+								"empID" => $objResult["empID"],
+								"empName" => $objResult["empName"],
+								"pwd" => $objResult["password"]
+							);
+	$mysql->query("UPDATE emp SET `last-log-on`='".date("Y-m-d H:i:s",time())."' WHERE empID=".$objResult["empID"]);
+	
+	header("location: ../index.php");
+
+	
+}
 
 function navbar()
 {
@@ -22,14 +57,15 @@ function navbar()
 				<ul class="nav navbar-nav">
 STR;
 	$htmlLogin = <<<STR
-	<form class="navbar-form navbar-right" method="post" action="/function/chklogin.php">
+	<form class="navbar-form navbar-right" method="post" action="/function/function.php?login">
 		<ul class="nav navbar-nav navbar-right">
 			<li><input type="text" name="txtUser" class="form-control" placeholder="Username">&nbsp</li>
 			<li><div class="input-group">
 				<input input type="password" name="txtPass" class="form-control" placeholder="Password">
 				<span class="input-group-btn">
-					<button class="btn btn-info" type="submit" value="Login">LOGIN</button>
+					<input class="btn btn-info" type="submit" name='login' value="login">LOGIN</input>
 				</span>
+			</li>
 			</ul>
 	</form>
 STR;
@@ -42,12 +78,13 @@ STR;
 	if(!isset($_SESSION["login"]))echo $htmlLogin;
 	else 
 	{	
-		echo "<form action='/function/logout.php'>
+		echo "<form method='get' action='../function/function.php?'>
 		<ul class='nav navbar-nav navbar-right'>
 			<li><p class='navbar-text'>Hello , ".$_SESSION["login"]["empName"]."</p></li>
-			<li><button class='btn btn-danger navbar-btn' type='submit' value='LOGOUT'>LOGOUT</button></li>
+			<li><input class='btn btn-danger navbar-btn' type='submit' name='logout' value='logout'>LOGOUT</input></li>
+			
 		</ul>
-	</form>";
+		</form>";
 
 	}
 	echo "</div><!-- /.navbar-collapse -->
@@ -55,12 +92,7 @@ STR;
 	</nav>";
 }
 
-function logout()
-{
-	session_start();
-	session_destroy();
-	header("location: ../index.php");
-}
+
 
 /*function CheckPermission();
 {
@@ -73,7 +105,7 @@ function navLogin()
 	{
 		$navBar = <<<STR
 		<li class="dropdown">
-			<button class="btn btn-info dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="true">FAQ<span class="caret"></span></button>
+			<button class="btn btn-info dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">FAQ<span class="caret"></span></button>
 			<ul class="dropdown-menu" role="menu">
 				<li><a href="/faq/createfaq.php">Create FAQ</a></li>
 				<li><a href="/faq/tablefaq.php">Table FAQ</a></li>
@@ -145,5 +177,8 @@ STR;
 	}
 	return $navBar;
 }
+
+
+
 
 ?>
