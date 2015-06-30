@@ -28,7 +28,7 @@ if(isset($_GET['login']))
 								"empName" => $objResult["empName"],
 								"pwd" => $objResult["password"]
 							);
-	$mysql->query("UPDATE emp SET `last-log-on`='".date("Y-m-d H:i:s",time())."' WHERE empID=".$objResult["empID"]);
+	$mysql->query("UPDATE emp SET last_log_on='".date("Y-m-d H:i:s",time())."' WHERE empID=".$objResult["empID"]);
 	
 	header("location: ../index.php");
 
@@ -110,7 +110,7 @@ function navLogin()
 				<li><a href="/faq/createfaq.php">Create FAQ</a></li>
 				<li><a href="/faq/tablefaq.php">Table FAQ</a></li>
 				<li class="divider"></li>
-				<li><a href="#">Report</a></li>
+				<li><a href="/report/index.php">Report</a></li>
 			</ul>
 		</li>
 		<li class="dropdown">
@@ -119,7 +119,7 @@ function navLogin()
 				<li><a href="/ticket/createticket.php">Create Ticket</a></li>
 				<li><a href="/ticket/tableticket.php">Table Ticket</a></li>
 				<li class="divider"></li>
-				<li><a href="#">Report</a></li>
+				<li><a href="/report/index.php">Report</a></li>
 			</ul>
 		</li>
 		<li class="dropdown">
@@ -141,8 +141,6 @@ STR;
 			<ul class="dropdown-menu" role="menu">
 				<li><a href="/faq/createfaq.php">Create FAQ</a></li>
 				<li><a href="/faq/tablefaq.php">Table FAQ</a></li>
-				<li class="divider"></li>
-				<li><a href="#">Report</a></li>
 			</ul>
 		</li>
 		<li class="dropdown">
@@ -150,8 +148,6 @@ STR;
 			<ul class="dropdown-menu" role="menu">
 				<li><a href="/ticket/createticket.php">Create Ticket</a></li>
 				<li><a href="/ticket/tableticket.php">Table Ticket</a></li>
-				<li class="divider"></li>
-				<li><a href="#">Report</a></li>
 			</ul>
 		</li>
 STR;
