@@ -79,7 +79,7 @@ $mysql->query($strInsert);
 		<div class="row">
 			<div class="col-xs-12 col-sd-12 col-md-12">
 				<div class="jumbotron">
-					<?php echo $_POST['FAQdescript'];?>
+					<?php echo htmlspecialchars_decode($_POST['FAQdescript'],ENT_HTML5);?>
 					<br><hr>
 					<div class="pull-right">
 						<h4><small>Create By </small><?php echo $_SESSION["login"]["empName"];?></h4>

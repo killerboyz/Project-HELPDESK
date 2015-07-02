@@ -93,82 +93,102 @@ STR;
 }
 
 
-
-/*function CheckPermission();
-{
-
-}*/
-
 function navLogin()
 {
 	if($_SESSION["login"]["Class"] == "admin")
 	{
 		$navBar = <<<STR
-		<li class="dropdown">
-			<button class="btn btn-info dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">FAQ<span class="caret"></span></button>
-			<ul class="dropdown-menu" role="menu">
-				<li><a href="/faq/createfaq.php">Create FAQ</a></li>
-				<li><a href="/faq/tablefaq.php">Table FAQ</a></li>
-				<li class="divider"></li>
-				<li><a href="/report/index.php">Report</a></li>
-			</ul>
-		</li>
-		<li class="dropdown">
-			<button class="btn btn-warning dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">Ticket<span class="caret"></span></button>
-			<ul class="dropdown-menu" role="menu">
-				<li><a href="/ticket/createticket.php">Create Ticket</a></li>
-				<li><a href="/ticket/tableticket.php">Table Ticket</a></li>
-				<li class="divider"></li>
-				<li><a href="/report/index.php">Report</a></li>
-			</ul>
-		</li>
-		<li class="dropdown">
-			<button class="btn btn-success dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">User<span class="caret"></span></button>
-			<ul class="dropdown-menu" role="menu">
-				<li><a href="/user/createuser.php">Create USER</a></li>
-				<li><a href="/user/tableuser.php">Table User</a></li>
-				<li class="divider"></li>
-				<li><a href="#">Report</a></li>
-			</ul>
-		</li>
+	<li>
+		<div class="btn-group">
+
+			<div class="btn-group">
+				<button class="btn btn-info dropdown-toggle navbar-btn " data-toggle="dropdown" aria-expanded="false">FAQ<span class="caret"></span></button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="/faq/createfaq.php">Create FAQ</a></li>
+					<li><a href="/faq/tablefaq.php">Table FAQ</a></li>
+					<li class="divider"></li>
+					<li><a href="/report/index.php">Report</a></li>
+				</ul>
+			</div>
+
+			<div class="btn-group">
+				<button class="btn btn-warning dropdown-toggle navbar-btn " data-toggle="dropdown" aria-expanded="false">Ticket<span class="caret"></span></button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="/ticket/createticket.php">Create Ticket</a></li>
+					<li><a href="/ticket/tableticket.php">Table Ticket</a></li>
+					<li class="divider"></li>
+					<li><a href="/report/index.php">Report</a></li>
+				</ul>
+			</div>
+
+			<div class="btn-group">
+				<button class="btn btn-success dropdown-toggle navbar-btn " data-toggle="dropdown" aria-expanded="false">User<span class="caret"></span></button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="/user/createuser.php">Create USER</a></li>
+					<li><a href="/user/tableuser.php">Table User</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Report</a></li>
+				</ul>
+			</div>
+
+		</div>
+	</li>
+
+		
 STR;
 	}
 	if($_SESSION["login"]["Class"] == "support")
 	{
 		$navBar = <<<STR
-		<li class="dropdown">
-			<button class="btn btn-info dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="true">FAQ<span class="caret"></span></button>
-			<ul class="dropdown-menu" role="menu">
-				<li><a href="/faq/createfaq.php">Create FAQ</a></li>
-				<li><a href="/faq/tablefaq.php">Table FAQ</a></li>
-			</ul>
-		</li>
-		<li class="dropdown">
-			<button class="btn btn-warning dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">Ticket<span class="caret"></span></button>
-			<ul class="dropdown-menu" role="menu">
-				<li><a href="/ticket/createticket.php">Create Ticket</a></li>
-				<li><a href="/ticket/tableticket.php">Table Ticket</a></li>
-			</ul>
-		</li>
+	<li>
+		<div class="btn-group">
+		
+			<div class="btn-group">
+				<button class="btn btn-info dropdown-toggle navbar-btn " data-toggle="dropdown" aria-expanded="false">FAQ<span class="caret"></span></button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="/faq/createfaq.php">Create FAQ</a></li>
+					<li><a href="/faq/tablefaq.php">Table FAQ</a></li>
+				</ul>
+			</div>
+
+			<div class="btn-group">
+				<button class="btn btn-warning dropdown-toggle navbar-btn " data-toggle="dropdown" aria-expanded="false">Ticket<span class="caret"></span></button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="/ticket/createticket.php">Create Ticket</a></li>
+					<li><a href="/ticket/tableticket.php">Table Ticket</a></li>
+				</ul>
+			</div>
+
+		</div>
+	</li>
+
 STR;
 	}
 	if($_SESSION["login"]["Class"] == "user")
 	{
 		$navBar = <<<STR
-		<li class="dropdown">
-			<button class="btn btn-info dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="true">FAQ<span class="caret"></span></button>
-			<ul class="dropdown-menu" role="menu">
-				<li><a href="/faq/tablefaq.php">Table FAQ</a></li>
-			</ul>
-		</li>
-		<li class="dropdown">
-			<button class="btn btn-warning dropdown-toggle navbar-btn" data-toggle="dropdown" aria-expanded="false">Ticket<span class="caret"></span></button>
-			<ul class="dropdown-menu" role="menu">
-				<li><a href="/ticket/createticket.php">Create Ticket</a></li>
-				<li class="divider"></li>
-				<li><a href="/ticket/tableticket.php">Check Ticket</a></li>
-			</ul>
-		</li>
+	<li>
+		<div class="btn-group">
+		
+			<div class="btn-group">
+				<button class="btn btn-info dropdown-toggle navbar-btn " data-toggle="dropdown" aria-expanded="false">FAQ<span class="caret"></span></button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="/faq/tablefaq.php">Table FAQ</a></li>
+				</ul>
+			</div>
+
+			<div class="btn-group">
+				<button class="btn btn-warning dropdown-toggle navbar-btn " data-toggle="dropdown" aria-expanded="false">Ticket<span class="caret"></span></button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="/ticket/createticket.php">Create Ticket</a></li>
+					<li class="divider"></li>
+					<li><a href="/ticket/tableticket.php">Check Ticket</a></li>
+				</ul>
+			</div>
+		</div>
+	</li>
+
+		
 STR;
 	}
 	return $navBar;

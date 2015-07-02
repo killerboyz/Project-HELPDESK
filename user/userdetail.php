@@ -134,8 +134,8 @@ $objResult = mysqli_fetch_assoc($mysql->query($strSQL));
 								<label class="control-label">Last Log On</label>
 								<text class="form-control" readonly disable="">
 									<?php 
-									if($objResult["last-log-on"] == null) echo "Not Yet";
-									else echo $objResult["last-log-on"];
+									if($objResult["last_log_on"] == null) echo "Not Yet";
+									else echo $objResult["last_log_on"];
 									?>
 								</text>
 							</div>

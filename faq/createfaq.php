@@ -57,7 +57,7 @@ require "../function/function.php";
 
                         CKEDITOR.replace( 'FAQdescript',
                         {
-                            extraPlugins: 'image2,imageresponsive,tableresize'
+                            
                         });
 
                 </script>

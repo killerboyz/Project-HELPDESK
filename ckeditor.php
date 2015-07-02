@@ -14,18 +14,10 @@
             <script>
                 // Replace the <textarea id="editor1"> with a CKEditor
                 // instance, using default configuration.
-               CKEDITOR.replace( 'editor1',{
-                    // add class img-responsive for img tag
-                    //allowContent:'',
-                    //extraAllowedContent: '' ,
-
-                    // call plugin
-                    extraPlugins: 'image2,imageresponsive,tableresize'
-
-
-
+               CKEDITOR.replace( 'editor1',
+               {
                 
-                });
+               });
 
                
 
