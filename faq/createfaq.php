@@ -31,6 +31,8 @@ require "../function/function.php";
   <!-- ---------------------------------------------------------------------------------------------------------------- NAVIGATOR BAR --------------------------------------------------------------------------------- -->
 
   <div class="container">
+  <div class="">
+  <div class="row">
     <form method="post" action="../faq/chkcreatefaq.php">
       
         <div class="row">
@@ -57,7 +59,7 @@ require "../function/function.php";
 
                         CKEDITOR.replace( 'FAQdescript',
                         {
-                            
+                          //height = 500;
                         });
 
                 </script>
@@ -79,6 +81,8 @@ require "../function/function.php";
         </div>
 
     </form>
+    </div>
+    </div>
 </div>
 
 

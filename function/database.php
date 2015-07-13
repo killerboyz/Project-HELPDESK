@@ -1,7 +1,7 @@
 <?php 
 
 function mysqlConnect() {
-	$mysqli = new mysqli("127.0.0.1", "admin", "p3wHLTyZLcVv7eQC", "helpdesk");
+	$mysqli = new mysqli("localhost", "root", "Onizuka", "helpdesk");
 
 	if ($mysqli->connect_errno)
 	{

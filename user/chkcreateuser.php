@@ -5,7 +5,7 @@ include "../function/database.php";
 require '../function/email/PHPMailerAutoload.php';
 
 $mysql = mysqlConnect();
-$chkUser = mysqli_fetch_array($mysql->query("SELECT 'username' FROM emp WHERE username = '".mysql_real_escape_string($_POST['txtUsername'])."'"),MYSQLI_ASSOC);
+$chkUser = mysqli_fetch_array($mysql->query("SELECT username FROM emp WHERE username='".mysqli_real_escape_string($mysql,$_POST['txtUser'])."'"),MYSQLI_ASSOC);
 
 
 if($_POST["pwdtoconfirm"] != $_SESSION["login"]["pwd"])
@@ -34,16 +34,20 @@ if (!filter_var($_POST["txtempEmail"], FILTER_VALIDATE_EMAIL))
 
 
 $strInsert = "INSERT INTO 
-							emp 
+							emp (username,
+								password,
+								empName,
+								empEmail,
+								empTel,
+								Class)
 					VALUES
-							(NULL,'"
-							.$_POST["txtUsername"]."','"
+							('".$_POST["txtUsername"]."','"
 							.$_POST["txtPassword"]."','"
 							.$_POST["txtempName"]."','"
 							.$_POST["txtempEmail"]."','"
 							.$_POST["txtempTel"]."','"
-							.$_POST["Class"]."',
-							NULL)";
+							.$_POST["Class"]."')";
+
 $mysql->query($strInsert);
 
 $mail = new PHPMailer;

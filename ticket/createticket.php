@@ -35,7 +35,7 @@ require "../function/function.php";
 
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      
         <div class="panel panel-info ">
           <div class="panel-heading">Employee Detail</div>
           <div class="panel-body">
@@ -47,14 +47,14 @@ require "../function/function.php";
             </div>
           </div>
         </div>
-      </div>
+      
     </div>
   </div>
 
   <div class="container">
     <form name="CreateTicket" method="post" enctype="multipart/form-data" action="/ticket/chkcreateticket.php" >
       <div class="row">
-        <div class="col-md-12">
+        
           <div class="panel panel-danger ">
             <div class="panel-heading">Ticket Trouble Detail</div>
             <div class="panel-body">
@@ -112,7 +112,7 @@ require "../function/function.php";
             </div>
 
           </div>
-        </div>
+        
       </div>
     </form>
   </div>

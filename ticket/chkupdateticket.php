@@ -8,7 +8,7 @@ if(htmlspecialchars($_POST['txtPassword']) != $_SESSION["login"]["pwd"])
 {
 	echo "<script>
 		alert(\"Please type Your Password !!\");
-		window.location.hostname;
+		window.history.back();
 		</script>";
 	exit();
 }
@@ -17,7 +17,7 @@ if($_POST["txtUpdateDetail"] == null )
 {
 	echo "<script>
 		alert(\"Please Update !!\");
-		window.location.hostname;
+		window.history.back();
 		</script>";
 	exit();
 }

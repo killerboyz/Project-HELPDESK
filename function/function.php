@@ -13,7 +13,7 @@ if(isset($_GET['login']))
 	include '../function/database.php';
 
 	$mysql = mysqlConnect();
-	$objResult = mysqli_fetch_assoc($mysql->query("SELECT * FROM emp WHERE username = '".mysql_real_escape_string($_POST['txtUser'])."' and password = '".mysql_real_escape_string($_POST['txtPass'])."'"));
+	$objResult = mysqli_fetch_assoc($mysql->query("SELECT * FROM emp WHERE username = '".mysqli_real_escape_string($mysql,$_POST['txtUser'])."' and password = '".mysqli_real_escape_string($mysql,$_POST['txtPass'])."'"));
 
 	if(!$objResult) {
 		echo 	"<script>
@@ -57,7 +57,7 @@ function navbar()
 				<ul class="nav navbar-nav">
 STR;
 	$htmlLogin = <<<STR
-	<form class="navbar-form navbar-right" method="post" action="/function/function.php?login">
+	<form class="navbar-form navbar-right" method="post" action="function/function.php?login">
 		<ul class="nav navbar-nav navbar-right">
 			<li><input type="text" name="txtUser" class="form-control" placeholder="Username">&nbsp</li>
 			<li><div class="input-group">
@@ -70,15 +70,16 @@ STR;
 	</form>
 STR;
 	echo $htmlnav1;
-	if(!isset($_SESSION["login"]));
-	else echo navLogin();
+	if (empty($_SESSION['login']) && parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) != '/index.php') header('Location: ../index.php');
+    else echo navLogin();
+
 	echo "<li><a href=\"#\">About US</a></li>
 		</ul>";
 
 	if(!isset($_SESSION["login"]))echo $htmlLogin;
 	else 
 	{	
-		echo "<form method='get' action='../function/function.php?'>
+		echo "<form method='get' action='/function/function.php?'>
 		<ul class='nav navbar-nav navbar-right'>
 			<li><p class='navbar-text'>Hello , ".$_SESSION["login"]["empName"]."</p></li>
 			<li><input class='btn btn-danger navbar-btn' type='submit' name='logout' value='logout'>LOGOUT</input></li>
@@ -107,7 +108,7 @@ function navLogin()
 					<li><a href="/faq/createfaq.php">Create FAQ</a></li>
 					<li><a href="/faq/tablefaq.php">Table FAQ</a></li>
 					<li class="divider"></li>
-					<li><a href="/report/index.php">Report</a></li>
+					<li><a href="/faq/faqreport.php">Report</a></li>
 				</ul>
 			</div>
 
@@ -117,7 +118,7 @@ function navLogin()
 					<li><a href="/ticket/createticket.php">Create Ticket</a></li>
 					<li><a href="/ticket/tableticket.php">Table Ticket</a></li>
 					<li class="divider"></li>
-					<li><a href="/report/index.php">Report</a></li>
+					<li><a href="/ticket/ticketreport.php">Report</a></li>
 				</ul>
 			</div>
 
@@ -127,7 +128,7 @@ function navLogin()
 					<li><a href="/user/createuser.php">Create USER</a></li>
 					<li><a href="/user/tableuser.php">Table User</a></li>
 					<li class="divider"></li>
-					<li><a href="#">Report</a></li>
+					<li><a href="/user/userreport.php">Report</a></li>
 				</ul>
 			</div>
 

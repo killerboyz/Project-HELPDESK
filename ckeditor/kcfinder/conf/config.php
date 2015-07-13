@@ -22,7 +22,7 @@ return array(
 // GENERAL SETTINGS
 
     'disabled' => false,
-    'uploadURL' => "/faq/images",
+    'uploadURL' => "/faq/upload",
     'uploadDir' => "",
     'theme' => "default",
 
@@ -64,7 +64,7 @@ return array(
 
 // PERMISSION SETTINGS
 
-    'dirPerms' => 0755,
+    'dirPerms' => 0777,
     'filePerms' => 0644,
 
     'access' => array(

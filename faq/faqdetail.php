@@ -14,6 +14,15 @@ $strSQL = "SELECT
 
 $objResult = mysqli_fetch_assoc($mysql->query($strSQL));
 
+$strUpdate = "UPDATE
+					faq
+				SET 
+					hits = hits+1
+				WHERE
+					faqID='".$_GET["faqID"]."'";
+$mysql->query($strUpdate);
+
+
 
 
 

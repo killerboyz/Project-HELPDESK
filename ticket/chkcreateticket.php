@@ -20,21 +20,17 @@ $mysql->query($strInsert);
 $ticketID = $mysql->insert_id;
 $psrPath = "psrFiles/psrOf_".$ticketID.".zip";
 
-if (isset($_FILES['psrUpload']))
+
+
+
+if(!empty($_FILES['psrUpload']['size']))
 {
-	if ($_FILES['psrUpload']['name'] != '') 
-	{
-		global $psrPath;
-		if(move_uploaded_file($_FILES["psrUpload"]["tmp_name"],$psrPath));
-	}
-	$strUpdate = "UPDATE 
-					ticket 
-				SET 
-					psrPath='".$psrPath."'
-				WHERE 
-					TicketID='".$ticketID."'";
+	global $psrPath;
+	if(move_uploaded_file($_FILES["psrUpload"][0],$psrPath));
+	$strUpdate = "UPDATE ticket SET psrPath='".$psrPath."' WHERE TicketID='".$ticketID."'";
 	$mysql->query($strUpdate);
 }
+
 
 
 

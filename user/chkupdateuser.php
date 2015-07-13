@@ -2,21 +2,24 @@
 session_start();
 require "../function/function.php";
 include "../function/database.php";
+require '../function/email/PHPMailerAutoload.php';
 
 $mysql = mysqlConnect();
 
 if($_POST["pwdtoconfirm"] != $_SESSION["login"]["pwd"])
 {
 	echo "<script>
-	alert('Please type your correct Password!');
-	window.history.back();</script>";
+		alert('Please type your correct Password!');
+		window.history.back();</script>";
 	exit();
 	
 }
 
 if (!filter_var($_POST["txtempEmail"], FILTER_VALIDATE_EMAIL)) 
 {
-	echo "<script>alert('Please input Correct E-mail (example : email@example.com)');window.history.back();</script>";
+	echo "<script>
+		alert('Please input Correct E-mail (example : email@example.com)');
+		window.history.back();</script>";
 	exit();
 }
 
@@ -31,6 +34,58 @@ $strUpdate = "UPDATE
 				WHERE 
 					empID='".$_POST["txtempID"]."'";
 $mysql->query($strUpdate);
+
+$mail = new PHPMailer;
+
+$mail->isSMTP();                                      // Set mailer to use SMTP
+$mail->Host = 'smtp.gmail.com';                       // Specify main and backup server
+$mail->SMTPAuth = true;                               // Enable SMTP authentication
+$mail->Username = 'project.helpdesk.siam@gmail.com';                   // SMTP username
+$mail->Password = 'HELPDESK2015';               // SMTP password
+$mail->SMTPSecure = 'tls';                            // Enable encryption, 'ssl' also accepted
+$mail->Port = 587;                                    //Set the SMTP port number - 587 for authenticated TLS
+$mail->setFrom('project.helpdesk.siam@gmail.com', 'PROJECT HELPDESK');     //Set who the message is to be sent from
+$mail->addAddress($_POST["txtempEmail"], $_POST["txtempName"]);  // Add a recipient
+$mail->isHTML(true);                                  // Set email format to HTML
+$mail->Subject = 'Your Account of HELPDESK SERVICE has been Update Successfully';
+$mail->Body    = '<h1><strong><span style="color:#0000FF;">Your Account has been Create Succesfully</span></strong></h1>
+
+					<hr />
+					<ul>
+						<li>
+							<h3><span style="color:#008080;">Employee ID : '.$mysql->insert_id.'</span></h3>
+						</li>
+						<li>
+							<h3><span style="color:#008080;">Username : '.$_POST["txtUsername"].'</span></h3>
+						</li>
+						<li>
+							<h3><span style="color:#008080;">Password : '.$_POST["txtPassword"].'</span></h3>
+						</li>
+						<li>
+							<h3><span style="color:#008080;">Employee Name : '.$_POST["txtempName"].'</span></h3>
+						</li>
+						<li>
+							<h3><span style="color:#008080;">Employee E-mail : '.$_POST["txtempEmail"].'</span></h3>
+						</li>
+						<li>
+							<h3><span style="color:#008080;">Employee Tel : '.$_POST["txtempTel"].'</span></h3>
+						</li>
+						<li>
+							<h3><span style="color:#008080;">Class : '.$_POST["Class"].'</span></h3>
+						</li>
+					</ul>
+
+					<hr />
+					<h2><span style="color:#FF8C00;">Your Account has been Update By : '.$_SESSION["login"]["empName"].'</span></h2>
+
+					<p><strong>If you have any problem , Please tell us.</strong></p>';
+
+
+if(!$mail->send()) {
+	echo 'Message could not be sent.';
+	echo 'Mailer Error: ' . $mail->ErrorInfo;
+	exit;
+}
 
 ?>
 

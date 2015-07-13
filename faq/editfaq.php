@@ -47,6 +47,7 @@ if($_SESSION["login"]["Class"] == "user")
   <!-- ---------------------------------------------------------------------------------------------------------------- NAVIGATOR BAR --------------------------------------------------------------------------------- -->
 
   <div class="container">
+  <div class="row">
     <form method="post" action="../faq/chkeditfaq.php">
       
 
@@ -115,6 +116,7 @@ if($_SESSION["login"]["Class"] == "user")
           </div>
 
         </form>
+        </div>
       </div>
 
 

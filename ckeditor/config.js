@@ -14,4 +14,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.filebrowserImageUploadUrl = '/ckeditor/kcfinder/upload.php?opener=ckeditor&type=images';
 	config.filebrowserFlashUploadUrl = '/ckeditor/kcfinder/upload.php?opener=ckeditor&type=flash';
 
+	// set height
+	config.height = 500; 
+
 };

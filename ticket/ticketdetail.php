@@ -127,22 +127,22 @@ function ConfirmUpdate()
 					<div class="row">
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Create By</label>
-							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($objResult["Create_By"]);?></text>
+							<text class="form-control" readonly disable=""><?php echo htmlspecialchars_decode($objResult["Create_By"],ENT_HTML5);?></text>
 						</div>
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Create On</label>
-							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($objResult["Create_On"]);?></text>
+							<text class="form-control" readonly disable=""><?php echo htmlspecialchars_decode($objResult["Create_On"],ENT_HTML5);?></text>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Employee Email</label>
-							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($objResult["empEmail"]);?></text>
+							<text class="form-control" readonly disable=""><?php echo htmlspecialchars_decode($objResult["empEmail"],ENT_HTML5);?></text>
 						</div>
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Employee Tel</label>
-							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($objResult["empTel"]);?></text>
+							<text class="form-control" readonly disable=""><?php echo htmlspecialchars_decode($objResult["empTel"],ENT_HTML5);?></text>
 						</div>
 					</div>
 				</div>
@@ -161,29 +161,29 @@ function ConfirmUpdate()
 					<div class="row">
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Ticket ID</label>
-							<text class="form-control" name="tickID" id="tickID" readonly disable=""><?php echo htmlspecialchars($_GET["ticketID"]);?></text>
+							<text class="form-control" name="tickID" id="tickID" readonly disable=""><?php echo htmlspecialchars_decode($_GET["ticketID"],ENT_HTML5);?></text>
 						</div>
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Ticket Topic</label>
-							<text class="form-control" name="tickTopic" id="tickTopic" readonly disable=""><?php echo htmlspecialchars($objResult["TicketTopic"]);?></text>
+							<text class="form-control" name="tickTopic" id="tickTopic" readonly disable=""><?php echo htmlspecialchars_decode($objResult["TicketTopic"],ENT_HTML5);?></text>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9">
 							<label class="control-label">Trouble Detail</label>
-							<textarea class="form-control" name="txtDetail" id="txtDetail" rows="6" style="resize: none;"readonly disabled><?php echo htmlspecialchars($objResult["TroubleDetail"]);?></textarea>
+							<textarea class="form-control" name="txtDetail" id="txtDetail" rows="6" style="resize: none;"readonly disabled><?php echo htmlspecialchars_decode($objResult["TroubleDetail"],ENT_HTML5);?></textarea>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Type</label>
-							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($objResult["TicketType"]);?></text>
+							<text class="form-control" readonly disable=""><?php echo htmlspecialchars_decode($objResult["TicketType"],ENT_HTML5);?></text>
 						</div>
 						<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 							<label class="control-label">Priority</label>
-							<text class="form-control" readonly disable=""><?php echo htmlspecialchars($objResult["Priority"]);?></text>
+							<text class="form-control" readonly disable=""><?php echo htmlspecialchars_decode($objResult["Priority"],ENT_HTML5);?></text>
 						</div>
 					</div>
 				</div>
@@ -229,7 +229,7 @@ function ConfirmUpdate()
 							<div class='row'>
 								<div class='col-xs-10 col-sd-offset-1 col-sd-11 col-md-offset-1 col-md-9'>
 									<label class='control-label'>Trouble Detail</label>
-									<textarea class='form-control' name='txtUpdateDetail' id='txtUpdateDetail' autocomplete='off' minlength='6' rows='4' required style='resize: none;'></textarea>
+									<textarea class='form-control' name='txtUpdateDetail' id='txtUpdateDetail' autocomplete='off' minlength='6' rows='10' required style='resize: none;'></textarea>
 								</div>
 							</div>";
 						}

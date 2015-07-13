@@ -117,7 +117,7 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////// Class
 	
-	$gentable .= "<form method='post' action='../user/userdetail.php'>\n".
+	$gentable .= "<form method='post' action='../user/userdetail.php?id=".$row['empID']."'>\n".
 	$hilight.
 	"<td><h4>".$row['empID']."</h></td>\n".
 	"<td><h4>".$row['username']."</h></td>\n".

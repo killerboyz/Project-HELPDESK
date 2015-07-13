@@ -14,9 +14,15 @@ exit();
 
 $mysql = mysqlConnect();
 $strInsert = "INSERT INTO 
-						faq (faqTopic, faqType, faqDescript, Create_By) 
+						faq (faqTopic,
+							faqType,
+							faqDescript,
+							Create_By) 
 					VALUES 
-						('".$_POST["FAQtopic"]."', '".$_POST["Type"]."', '".htmlspecialchars($_POST['FAQdescript'],ENT_HTML5)."', '".$_SESSION["login"]["empName"]."')";
+						('".$_POST["FAQtopic"]."',
+						'".$_POST["Type"]."',
+						'".htmlspecialchars($_POST['FAQdescript'],ENT_HTML5)."',
+						'".$_SESSION["login"]["empName"]."')";
 
 $mysql->query($strInsert);
 

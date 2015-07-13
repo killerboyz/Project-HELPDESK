@@ -8,7 +8,7 @@ $strSQL = "SELECT
 			FROM 
 				emp 
 			WHERE
-				empID='".$_POST["empID"]."'";
+				empID='".$_GET["id"]."'";
 
 $objResult = mysqli_fetch_assoc($mysql->query($strSQL));
 
