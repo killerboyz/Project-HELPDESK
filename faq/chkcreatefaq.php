@@ -3,10 +3,10 @@ session_start();
 require "../function/function.php";
 include "../function/database.php";
 
-if($_POST['ChkConfirm'] != "ABC")
+if($_POST['ChkConfirm'] != "CONFIRM")
 {
 	echo "<script>
-	alert(\"Please type ABC !!\");
+	alert(\"Please type CONFIRM !!\");
 	window.history.back();
 </script>";
 exit();

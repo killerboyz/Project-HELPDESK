@@ -3,7 +3,7 @@ session_start();
 require "../function/function.php";
 include "../function/database.php";
 
-
+$closed = '';
 $mysql = mysqlConnect();
 $strSQL = "SELECT 
 				T.TicketID,
@@ -37,6 +37,25 @@ $objResult = mysqli_fetch_assoc($mysql->query($strSQL));
 if($_SESSION["login"]["Class"] == "user") 
 	{
 		if($objResult["Create_By"] != $_SESSION["login"]["empName"]) header('Location: /ticket/tableticket.php');
+
+		if($objResult["Status"] == "Solved")
+		{
+			$closed = 	'<div class="row">
+							<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
+								<div class="form-group">
+						  			<br/>
+					  				<div class="input-group">
+						    			<span class="input-group-addon">CONFIRM</span>
+						    			<input type="hidden" name="tickID" id="tickID" value="'.$_GET['ticketID'].'">
+						   				<input type="text" name="txtConfirm" class="form-control" autocomplete="off" required inlength="7" required>
+										<span class="input-group-btn">
+					      					<button class="btn btn-danger" type="submit">Closed</button>
+					   					</span>
+					  				</div>
+								</div>
+							</div>
+						</div>';
+		}
 	}
 	
 function ConfirmUpdate()
@@ -50,7 +69,7 @@ function ConfirmUpdate()
 			<label class='control-label'>Confirm Update</label>
 			<div class='input-group'>
 				<span class='input-group-addon'>Type Password</span>
-				<input type='password' class='form-control' name='txtPassword' id='txtPassword' autocomplete='off' minlength='5' required onmouseover='mouseoverPass();'' onmouseout='mouseoutPass();''>
+				<input type='password' class='form-control' name='txtPassword' autocomplete='off' minlength='5' required onmouseover='mouseoverPass();' onmouseout='mouseoutPass();'>
 				<span class='input-group-btn'>";
 
 
@@ -261,6 +280,7 @@ function ConfirmUpdate()
 							
 
 						if($_SESSION["login"]["Class"] != "user") ConfirmUpdate();
+						else echo $closed;
 
 						?>
 
@@ -268,7 +288,7 @@ function ConfirmUpdate()
 				</div>
 			</div>
 
-			<div class="row center-block">
+			<div class="row ">
 				<a class="center-block btn btn-primary btn-lg" href="../index.php">Back to Home</a>
 			</div>
 			</form>

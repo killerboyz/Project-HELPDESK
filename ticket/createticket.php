@@ -102,7 +102,7 @@ require "../function/function.php";
               <div class="col-xs-5 col-sd-offset-1 col-sd-5 col-md-offset-1 col-md-4 form-group">
                 <label class="control-label">Please Type</label>
                 <div class="input-group">
-                  <span class="input-group-addon">ABC</span>
+                  <span class="input-group-addon">CONFIRM</span>
                   <input class="form-control" name="ChkConfirm" id="ChkConfirm" type="text" autocomplete="off" tabindex="5" required>
                   <span class="input-group-btn">
                     <button class="btn btn-success" type="submit" >Confirm</button>

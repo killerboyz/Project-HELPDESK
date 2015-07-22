@@ -77,7 +77,7 @@ $objResult = mysqli_fetch_assoc($mysql->query($strSQL));
 							</div>
 							<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 								<label class="control-label">Employee Name</label>
-								<input class="form-control" type="text" name="txtempName" tabindex="1" minlength="6" maxlength="50" autocomplete="off" title="Allow only a-z A-Z ก-ฮ" pattern=".{6,50}" required onkeypress="return chkName(event);" value="<?php echo htmlspecialchars($objResult["empName"]);?>">
+								<input class="form-control" type="text" name="txtempName" tabindex="1" minlength="6" maxlength="50" autocomplete="off" title="Allow only a-z A-Z ก-ฮ" pattern=".{6,50}" required onkeyup="this.value=this.value.replace(/[^0-9A-Za-zก-๙\s]/ig, '')" value="<?php echo htmlspecialchars($objResult["empName"]);?>">
 							</div>
 						</div>
 
@@ -88,7 +88,7 @@ $objResult = mysqli_fetch_assoc($mysql->query($strSQL));
 							</div>
 							<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 								<label class="control-label">Password</label>
-								<input class="form-control" type="password" name="txtPassword" id="txtPassword" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" minlength="6" maxlength="10" tabindex="2" required onkeypress="return chkUserPass(event);"value="<?php echo htmlspecialchars($objResult["password"]);?>">
+								<input class="form-control" type="password" name="txtPassword" id="txtPassword" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" minlength="6" maxlength="10" tabindex="2" required onkeyup="this.value=this.value.replace(/[^0-9A-Za-z]/g, '')" value="<?php echo htmlspecialchars($objResult["password"]);?>">
 							</div>
 						</div>
 
@@ -99,7 +99,7 @@ $objResult = mysqli_fetch_assoc($mysql->query($strSQL));
 							</div>
 							<div class="col-xs-4 col-sd-offset-1 col-sd-4 col-md-offset-1 col-md-4">
 								<label class="control-label">Employee Tel</label>
-								<input type="tel" class="form-control" name="txtempTel" minlength="4" maxlength="15" autocomplete="off" pattern=".{6,15}" tabindex="6" required onkeypress="return chkTel(event);" value="<?php echo htmlspecialchars($objResult["empTel"]);?>">
+								<input type="tel" class="form-control" name="txtempTel" minlength="4" maxlength="15" autocomplete="off" pattern=".{6,15}" tabindex="6" required onkeyup="this.value=this.value.replace(/[^0-9]/ig, '')" value="<?php echo htmlspecialchars($objResult["empTel"]);?>">
 							</div>
 						</div>
 
@@ -161,7 +161,7 @@ $objResult = mysqli_fetch_assoc($mysql->query($strSQL));
 				</div>
 			</div>
 
-			<div class="row center-block">
+			<div class="row">
 				<a class="center-block btn btn-primary btn-lg" href="../index.php">Back to Home</a>
 			</div>
 		</form>

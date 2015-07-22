@@ -3,10 +3,9 @@ session_start();
 require "../function/function.php";
 include "../function/database.php";
 
-
 $mysql = mysqlConnect();
 
-$sqlSelect = $selclass = $createon = $lastlogon = $gentable = $firstdate = $lastdate = "";
+$sqlSelect = $selclass = $createon = $lastlogon = $gentable = $firstdate = $lastdate = $cl = "";
 
 if($_GET["by"] == "month") 
 {
@@ -21,46 +20,55 @@ if($_GET["by"] == "month")
 					ORDER BY 
 						last_log_on ASC,
 						Class ASC,
-						empID";
+						empID ASC";
 
 }
 else if($_GET["by"] == "options") 
 {
 
-	if(isset($_POST["Class"]) != NULL)
+	if(isset($_POST["Class"]))
 	{
 		$selclass .= "WHERE Class IN (";
-			if($_POST["Class"]["0"] != NULL) $selclass .= "'admin'";
+		if($_POST["Class"]["0"] != NULL) $selclass .= "'admin'";
 
-			if($_POST["Class"]["1"] != NULL) 
-			{
-				if(substr($selclass, -2) == "n'") $selclass .= ",'support'";
-				else $selclass .= "'support'";
-			}
+		if($_POST["Class"]["1"] != NULL) 
+		{
+			if(substr($selclass, -2) == "n'") $selclass .= ",'support'";
+			else $selclass .= "'support'";
+		}
 
-			if($_POST["Class"]["2"] != NULL)
-			{
-				if(substr($selclass, -1) == "'") $selclass .= ",'user'";
-				else $selclass .= "'user'";
-			}
+		if($_POST["Class"]["2"] != NULL)
+		{
+			if(substr($selclass, -1) == "'") $selclass .= ",'user'";
+			else $selclass .= "'user'";
+		}
 
-			$selclass .= ")";
-}
-////////////////// class
-if(!empty($_POST["startC"]) && !empty($_POST["endC"]))
-{
-	if($selclass != "") $createon = " AND (Create_On BETWEEN '".$_POST["startC"]." 00:00:00' AND '".$_POST["endC"]." 23:59:59')";
-	else $createon = " Create_On BETWEEN ('".$_POST["startC"]." 00:00:00' AND '".$_POST["endC"]." 23:59:59')";
-}
+		$selclass .= ")";
+	}
+	else
+	{
+		echo "<script>
+				alert(\"NO DATA IN YOUR SELECTED !!\");
+				window.location.href = '/user/userreport.php';
+				window.close();
+			</script>";
+			exit();
+	}
+	////////////////// class
+	if(!empty($_POST["startC"]) && !empty($_POST["endC"]))
+	{
+		if($selclass != "") $createon = " AND (Create_On BETWEEN '".$_POST["startC"]." 00:00:00' AND '".$_POST["endC"]." 23:59:59')";
+		else $createon = " Create_On BETWEEN ('".$_POST["startC"]." 00:00:00' AND '".$_POST["endC"]." 23:59:59')";
+	}
 
-if(!empty($_POST["startL"]) && !empty($_POST["endL"]))
-{
-	if($selclass != "" || substr($createon, -2) == "')") $lastlogon = " AND (last_log_on BETWEEN '".$_POST["startL"]." 00:00:00' AND '".$_POST["endL"]." 23:59:59')";
-	else $lastlogon = " last_log_on BETWEEN ('".$_POST["startL"]." 00:00:00' AND '".$_POST["endL"]." 23:59:59')";
-}
+	if(!empty($_POST["startL"]) && !empty($_POST["endL"]))
+	{
+		if($selclass != "" || substr($createon, -2) == "')") $lastlogon = " AND (last_log_on BETWEEN '".$_POST["startL"]." 00:00:00' AND '".$_POST["endL"]." 23:59:59')";
+		else $lastlogon = " last_log_on BETWEEN ('".$_POST["startL"]." 00:00:00' AND '".$_POST["endL"]." 23:59:59')";
+	}
 
-//////////////// datepickup
-$sqlSelect = "SELECT empID, empName, empEmail, empTel, Class, Create_On, last_log_on FROM emp ".$selclass.$createon.$lastlogon." ORDER BY last_log_on ASC, Class ASC, empID";
+	//////////////// datepickup
+	$sqlSelect = "SELECT empID, empName, empEmail, empTel, Class, Create_On, last_log_on FROM emp ".$selclass.$createon.$lastlogon." ORDER BY last_log_on ASC, Class ASC, empID ASC";
 }
 
 
@@ -106,6 +114,7 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 	"<td>".$row['last_log_on']."</td>\n
 	</tr>\n";
 }
+
 
 ?>
 
@@ -197,11 +206,12 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 					 	}
 					?>
 				</h>
+				<div class="col-md-offset-11">
+					<input type="button" class="btn btn-primary btn-sm" id="printpagebutton" value="Print" onclick="printpage()"/>
+				</div>
 			</div>
 
-			<div class="col-md-offset-11">
-				<input type="button" class="btn btn-primary btn-sm" id="printpagebutton" value="Print" onclick="printpage()"/>
-			</div>
+			
 
 					
 		</div>
@@ -210,19 +220,7 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 
 
 	<?php 
-
-	if(!empty($_POST["Class"]) || !empty($_POST["month"]))
-	{ 
-		if($gentable == '') 
-		{
-			echo "<script>
-					alert(\"NO DATA IN YOUR SELECTED !!\");
-					window.location.href = '/user/userreport.php';
-					window.close();
-				</script>";
-				exit();
-		}
-		echo '<div class="row">
+	echo '<div class="row">
 				<table id="myTable"class="table table-hover tablesorter">
 					<thead>
 						<tr>
@@ -239,7 +237,7 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 					'</table>
 				</div>';
 			
-	}
+	
 	?>
 	<!-- ---------------------------------------------------------------------------------------------------------------- TABLE GENERATOR --------------------------------------------------------------------------------- -->
 

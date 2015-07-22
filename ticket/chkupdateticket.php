@@ -4,35 +4,37 @@ require "../function/function.php";
 include "../function/database.php";
 require '../function/email/PHPMailerAutoload.php';
 
-if(htmlspecialchars($_POST['txtPassword']) != $_SESSION["login"]["pwd"])
-{
-	echo "<script>
-		alert(\"Please type Your Password !!\");
-		window.history.back();
-		</script>";
-	exit();
-}
-
-if($_POST["txtUpdateDetail"] == null )
-{
-	echo "<script>
-		alert(\"Please Update !!\");
-		window.history.back();
-		</script>";
-	exit();
-}
-
 $mysql = mysqlConnect();
-$textbreak = "<br/>
 
-**************************<br/>
-";
+$strSubject = $strBody = '';
+if($_SESSION["login"]["Class"] != "user")
+{
+	if(htmlspecialchars($_POST['txtPassword']) != $_SESSION["login"]["pwd"])
+	{
+		echo "<script>
+			alert(\"Please type Your Password !!\");
+			window.history.back();
+			</script>";
+		exit();
+	}
+	if($_POST["txtUpdateDetail"] == null )
+	{
+		echo "<script>
+			alert(\"Please Update !!\");
+			window.history.back();
+			</script>";
+		exit();
+	}
 
-$textfoot = "<br/>
+	$textbreak = "<br/>
+
+**************************<br/>";
+
+	$textfoot = "<br/>
 
 Support On : ".date("Y-m-d H:i:s",time())." By : ".$_SESSION['login']['empName'];
 
-$strUpdate = "UPDATE 
+	$strUpdate = "UPDATE 
 					ticket 
 				SET 
 					TroubleDetail=concat(TroubleDetail, '".htmlspecialchars($textbreak,ENT_HTML5).htmlspecialchars($_POST["txtUpdateDetail"],ENT_HTML5).$textfoot."'),
@@ -42,7 +44,82 @@ $strUpdate = "UPDATE
 				WHERE 
 					TicketID='".$_POST["tickID"]."'";
 
-$mysql->query($strUpdate);
+	$mysql->query($strUpdate);
+
+	$strSubject = 'Your Trouble is '.$objResult["Status"].' (Ticket ID : '.$objResult["TicketID"].')';
+	$strBody = '<h1><span style="color:#FF0000;"><strong>Your Trouble is '.$objResult["Status"].'.</strong></span></h1>
+
+	<hr/>
+
+	<ul>
+		<li>
+			<h3><strong><span style="background-color:#00FFFF;">Ticket ID :</span></strong></h3>'.$objResult["TicketID"].'
+		</li>
+		<li>
+			<h3><strong><span style="background-color:#00FFFF;">Ticket Topic :</span></strong></h3>'.$objResult["TicketTopic"].'
+		</li>
+		<li>
+			<h3><strong><span style="background-color:#00FFFF;">Trouble Detail :</span></strong></h3>'.htmlspecialchars_decode($objResult["TroubleDetail"],ENT_HTML5).'
+		</li>
+		<li>
+			<h3><strong><span style="background-color:#00FFFF;">Suppory On&nbsp;:</span></strong></h3>'.$objResult["Support_On"].'
+		</li>
+		<li>
+			<h3><strong><span style="background-color:#00FFFF;">Support By&nbsp;:</span></strong></h3>'.$objResult["Support_By"].'
+		</li>
+	</ul>
+
+	<hr />
+	<h2><strong><span style="background-color:#FFA07A;">This Ticket Create On</span></strong> :</h2>'.$objResult["Create_On"].'
+
+	<hr />
+
+	<h3><strong>If you have any problem , Please tell us.</strong></h3>';
+}
+else
+{
+	if(htmlspecialchars($_POST['txtConfirm']) != "CONFIRM")
+	{
+		echo "<script>
+			alert(\"Please type CONFIRM !!\");
+			window.history.back();
+			</script>";
+		exit();
+	}
+
+	$strUpdate = "UPDATE 
+					ticket 
+				SET 
+					Status='Closed'
+				WHERE 
+					TicketID='".$_POST["tickID"]."'";
+
+	$mysql->query($strUpdate);
+
+	$strSubject = 'Your Trouble is Closed by self (Ticket ID : '.$objResult["TicketID"].')';
+	$strBody = '<h1><span style="color:#FF0000;"><strong>Your Trouble is Closed by self.</strong></span></h1>
+
+	<hr/>
+	
+	<ul>
+		<li>
+			<h3><strong><span style="background-color:#00FFFF;">Ticket ID :</span></strong></h3>'.$objResult["TicketID"].'
+		</li>
+		<li>
+			<h3><strong><span style="background-color:#00FFFF;">Ticket Topic :</span></strong></h3>'.$objResult["TicketTopic"].'
+		</li>
+		<li>
+			<h3><strong><span style="background-color:#00FFFF;">Trouble Detail :</span></strong></h3>'.htmlspecialchars_decode($objResult["TroubleDetail"],ENT_HTML5).'
+		</li>
+	</ul>
+
+	<hr />
+	<h2><strong><span style="background-color:#FFA07A;">This Ticket Create On</span></strong> :</h2>'.$objResult["Create_On"].'
+
+	<hr/>
+
+	<h3><strong>If you have any problem , Please tell us.</strong></h3>';
+}
 
 $objResult = mysqli_fetch_assoc($mysql->query("SELECT 
 													T.TicketID,
@@ -69,7 +146,7 @@ $objResult = mysqli_fetch_assoc($mysql->query("SELECT
 												ON 
 													T.Support_By = E2.empID
 												WHERE
-			TicketID='".$_POST['tickID']."'"));
+													TicketID='".$_POST['tickID']."'"));
 
 if($_POST["status"] != "Open")
 {
@@ -93,53 +170,26 @@ if($_POST["status"] != "Open")
 	//$mail->addAttachment('/images/image.jpg', 'new.jpg'); // Optional name
 	$mail->isHTML(true);                                  // Set email format to HTML
 	
-	$mail->Subject = 'Your Trouble is '.$objResult["Status"].' (Ticket ID : '.$objResult["TicketID"].')';
-	$mail->Body    = '<h1><span style="color:#FF0000;"><strong>Your Trouble is '.$objResult["Status"].'.</strong></span></h1>
+	$mail->Subject = $strSubject;
 
-	<p>&nbsp;</p>
-
-	<ul>
-		<li>
-			<h3><strong><span style="background-color:#00FFFF;">Ticket ID :</span></strong></h3>'.$objResult["TicketID"].'
-		</li>
-		<li>
-			<h3><strong><span style="background-color:#00FFFF;">Ticket Topic :</span></strong></h3>'.$objResult["TicketTopic"].'
-		</li>
-		<li>
-			<h3><strong><span style="background-color:#00FFFF;">Trouble Detail :</span></strong></h3>'.htmlspecialchars_decode($objResult["TroubleDetail"],ENT_HTML5).'
-		</li>
-		<li>
-			<h3><strong><span style="background-color:#00FFFF;">Suppory On&nbsp;:</span></strong></h3>'.$objResult["Support_On"].'
-		</li>
-		<li>
-			<h3><strong><span style="background-color:#00FFFF;">Support By&nbsp;:</span></strong></h3>'.$objResult["Support_By"].'
-		</li>
-	</ul>
-
-	<hr />
-	<h2><strong><span style="background-color:#FFA07A;">This Ticket Create On</span></strong> :</h2>'.$objResult["Create_On"].'
-
-	<p>&nbsp;</p>
-
-	<h3><strong>If you have any problem , Please tell us.</strong></h3>
-
-	<p>&nbsp;</p>
-
-	<p>&nbsp;</p>
-	';
+	$mail->Body    = $strBody;
 	//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 	
 	//Read an HTML message body from an external file, convert referenced images to embedded,
 	//convert HTML into a basic plain-text alternative body
 	//$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
 	
-	if(!$mail->send()) {
+	if(!$mail->send()) 
+	{
 		echo 'Message could not be sent.';
 		echo 'Mailer Error: ' . $mail->ErrorInfo;
 		exit;
 	}
 
 }
+
+
+
 
 
 

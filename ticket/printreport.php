@@ -204,7 +204,15 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 
 	}
 
-
+if($gentable == '') 
+		{
+			echo "<script>
+					alert(\"NO DATA IN YOUR SELECTED !!\");
+					window.location.href = '/ticket/ticketreport.php';
+					window.close();
+				</script>";
+				exit();
+		}
 ?>
 
 <!doctype html>
@@ -335,8 +343,8 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 					?>
 				</h>
 				<div class="col-md-offset-11">
-				<input type="button" class="btn btn-primary btn-sm" id="printpagebutton" value="Print" onclick="printpage()"/>
-			</div>
+					<input type="button" class="btn btn-primary btn-sm" id="printpagebutton" value="Print" onclick="printpage()"/>
+				</div>
 			</div>
 
 					
@@ -344,20 +352,7 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 
 	<?php 
 
-	if(!empty($_POST["Status"]) || !empty($_POST["month"]))
-	{ 
-		
-	if($gentable == '') 
-		{
-			echo "<script>
-					alert(\"NO DATA IN YOUR SELECTED !!\");
-					window.location.href = '/ticket/ticketreport.php';
-					window.close();
-				</script>";
-				exit();
-		}
-
-		echo '<div class="row">
+	echo '<div class="row">
 				<table id="myTable"class="table table-hover tablesorter">
 					<thead>
 						<tr>
@@ -375,7 +370,7 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 					$gentable.
 					'</table>
 				</div>';
-	}
+	
 			
 	
 	?>

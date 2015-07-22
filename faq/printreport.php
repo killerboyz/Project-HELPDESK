@@ -76,7 +76,15 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 	</tr>\n</form>\n";
 }
 
-
+if($gentable == '') 
+		{
+			echo "<script>
+					alert(\"NO DATA IN YOUR SELECTED !!\");
+					window.location.href = '/faq/faqreport.php';
+					window.close();
+				</script>";
+				exit();
+		}
 ?>
 
 <!doctype html>
@@ -158,27 +166,18 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 					 	}
 					?>
 				</h>
+				<div class="col-md-offset-11">
+					<input type="button" class="btn btn-primary btn-sm" id="printpagebutton" value="Print" onclick="printpage()"/>
+				</div>
 			</div>
 
-			<div class="col-md-offset-11">
-				<input type="button" class="btn btn-primary btn-sm" id="printpagebutton" value="Print" onclick="printpage()"/>
-			</div>
+			
 					
 		</div>
 
 	<?php 
 
-	if(!empty($_POST["type"]) || !empty($_POST["month"]))
-	{ 
-		if($gentable == '') 
-		{
-			echo "<script>
-					alert(\"NO DATA IN YOUR SELECTED !!\");
-					window.location.href = '/faq/faqreport.php';
-					window.close();
-				</script>";
-				exit();
-		}
+	
 		echo '<div class="row">
 				<table class="table table-hover">
 					<thead>
@@ -195,7 +194,7 @@ while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 					'</table>
 				</div>';
 			
-	}
+	
 	?>
 	<!-- ---------------------------------------------------------------------------------------------------------------- TABLE GENERATOR --------------------------------------------------------------------------------- -->
 

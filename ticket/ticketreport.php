@@ -4,7 +4,7 @@ require "../function/function.php";
 include "../function/database.php";
 
 $mysql = mysqlConnect();
-
+$selSupport = '';
 $result = $mysql->query("SELECT empID, empName, Class FROM emp WHERE Class IN ('admin','support') ORDER BY empName ASC");
 while ($row = mysqli_fetch_array($result, MYSQL_ASSOC))
 {

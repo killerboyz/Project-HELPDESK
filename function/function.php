@@ -70,10 +70,10 @@ STR;
 	</form>
 STR;
 	echo $htmlnav1;
-	if (empty($_SESSION['login']) && parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) != '/index.php') header('Location: ../index.php');
-    else echo navLogin();
+	if(empty($_SESSION['login']) && parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) != '/index.php') header('Location: ../index.php');
+    else if(!empty($_SESSION['login'])) echo navLogin();
 
-	echo "<li><a href=\"#\">About US</a></li>
+	echo "<li><a href='../aboutus.php'>About US</a></li>
 		</ul>";
 
 	if(!isset($_SESSION["login"]))echo $htmlLogin;
@@ -95,7 +95,9 @@ STR;
 
 
 function navLogin()
-{
+{	
+
+
 	if($_SESSION["login"]["Class"] == "admin")
 	{
 		$navBar = <<<STR
